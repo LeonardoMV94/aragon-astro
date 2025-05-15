@@ -8,14 +8,23 @@
       "name": "Sobre nosotros",
       "url": "/sobre-nosotros"
     },
+    
     {
-      "name": "Contacto",
+      "name": "Features",
+      "url": "/features"
+    },
+    {
+      "name": "Contact",
       "url": "/contact"
     },
     {
-      "name": "Compliance",
-      "url": "/compliance"
+      "name": "How It Works",
+      "url": "/how-it-works"
     },
+    {
+          "name": "Careers",
+          "url": "/careers"
+        },
     {
       "name": "Pages",
       "url": "",
@@ -53,6 +62,14 @@
           "url": "/terms-and-conditions"
         }
       ]
+    },
+    {
+      "name": "Contacto",
+      "url": "/contact"
+    },
+    {
+      "name": "Denuncias",
+      "url": "/denuncias"
     }
   ],
 

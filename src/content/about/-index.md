@@ -1,6 +1,6 @@
 ---
-title: "About"
-page_title: "About our company"
+title: "about"
+page_title: "Sobre nosotros"
 meta_title: ""
 description: ""
 image: ""
@@ -15,11 +15,11 @@ buttons:
 
 # counter
 counter:
-  - name: "Customers"
+  - name: "Clientes"
     number: 25
     measurement: M
     color: "#A3A1FB"
-  - name: "Customers"
+  - name: "Proyectos adjudicados"
     number: 440
     measurement: M
     color: "#5EE2A0"

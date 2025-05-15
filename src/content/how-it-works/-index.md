@@ -18,24 +18,14 @@ performance:
     image: "/images/how-it-work/awards.png"
 # works
 our_works:
-  - title: We'll do the legwork so you don't have to.
+  - title: Nuestra Mision.
     image: "/images/how-it-work/image-1.png"
     list:
-      - Supporting more than 119 country world
-      - Open transaction with more than currencies
-      - Customer Service with 79 languages
-  - title: We'll do the legwork so you don't have to.
+      - Constructora Aragón Limitada se dedica a la ejecución de obras viales para los sectores público y privado, con una sólida trayectoria en proyectos SERVIU. Nos especializamos en el diseño y construcción de infraestructura vial, incluyendo pavimentación asfáltica y de hormigón, accesos viales, conservación de rutas, movimiento de tierras y obras civiles. Nuestro propósito es contribuir al desarrollo sostenible de la Región de Valparaíso, mediante soluciones constructivas eficientes, seguras y de alto estándar técnico.
+  - title: Nuestra Visión.
     image: "/images/how-it-work/image-2.png"
     list:
-      - Supporting more than 119 country world
-      - Open transaction with more than currencies
-      - Customer Service with 79 languages
-  - title: Check out their profiles, reviews On.
-    image: "/images/how-it-work/image-3.png"
-    list:
-      - Supporting more than 119 country world
-      - Open transaction with more than currencies
-      - Customer Service with 79 languages
+      - Ser una empresa de referencia en la Región de Valparaíso en el ámbito de la infraestructura vial, reconocida por la calidad de sus obras, su capacidad técnica y su compromiso con el desarrollo regional. Proyectamos nuestro crecimiento sostenido a través de la participación en proyectos de mayor envergadura, con la proyección de conformar un holding empresarial que integre diversas áreas de la construcción y servicios asociados, aportando valor y excelencia al sector.
 ---
 
 Donec sollicitudin molestie malesda. Donec sollitudin molestie malesuada. Mauris pellentesque <br /> nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.Lorem

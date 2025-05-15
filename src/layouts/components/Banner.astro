@@ -2,7 +2,10 @@
 import { markdownify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
 const { banner } = Astro.props;
-const { title, button, image, content } = banner;
+const {  button, image } = banner;
+
+const title = "Líderes en obras viales y urbanización en la Región de Valparaíso";
+const content = "Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.";
 ---
 
 <section class="section banner relative">
@@ -13,13 +16,9 @@ const { title, button, image, content } = banner;
 
         <p class="mt-6" set:html={markdownify(content)} />
 
-        {
-          button.enable && (
-            <a class="btn btn-white mt-8" href={button.link}>
-              {button.label}
-            </a>
-          )
-        }
+        <!-- <a class="btn btn-white mt-8" href={button.link}>
+          {button.label}
+        </a> -->
       </div>
       <div class="lg:col-6">
         <Image

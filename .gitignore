@@ -2,6 +2,7 @@
 dist/
 .output/
 .json/
+.wrangler
 
 # dependencies
 node_modules/

@@ -1,0 +1,37 @@
+[
+  {
+    "nombre": "Aldo Aragón",
+    "rol": "Gerente General",
+    "titulo": "Ingeniero Constructor"
+  },
+  {
+    "nombre": "Christopher Gortaire",
+    "rol": "Gerente Técnico",
+    "titulo": "Ingeniero Constructor"
+  },
+  {
+    "nombre": "Fernanda Cepeda",
+    "rol": "Gerente Administración y Finanzas",
+    "titulo": "Ingeniero Civil Industrial"
+  },
+  {
+    "nombre": "Catheryn Latorre",
+    "rol": "Jefe Administración y Control",
+    "titulo": "Ingeniero en Administración"
+  },
+  {
+    "nombre": "Pamela Sacre",
+    "rol": "Administrador de Obra",
+    "titulo": "Ingeniero Constructor"
+  },
+  {
+    "nombre": "Cristian Jara",
+    "rol": "Administrador de Obra",
+    "titulo": "Ingeniero Constructor"
+  },
+  {
+    "nombre": "Manuel Bustos",
+    "rol": "Autocontrol",
+    "titulo": "Ingeniero Constructor"
+  }
+]

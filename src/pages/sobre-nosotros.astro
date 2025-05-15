@@ -1,0 +1,76 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import Shape from '@/components/Shape.astro';
+import OurMembers from '@/components/about/OurMembers.astro';
+import ListadoProyectos from '@/layouts/function-components/ListadoProyectos.jsx';
+import ApexChart from '@/layouts/function-components/Chart.jsx';
+
+const about = (await getEntry('about', '-index')) as CollectionEntry<'about'>;
+const { members } = about.data;
+
+import proyectos from '@/config/proyectos.json'; // Import the updated JSON
+
+const processedProjects = proyectos.map((proyecto) => {
+  return {
+    data: {
+      title: proyecto.SIGLA,
+      excerpt: proyecto['NOMBRE DEL PROYECTO'],
+      job_nature: proyecto.YEAR.toString(),
+      location: proyecto.MANDANTE || 'N/A',
+      categories: [proyecto.category], // Use the new 'category' field
+      calificacion: proyecto['CALIFICACIÓN'] || '',
+      monto: proyecto['MONTO (UF)'] || '',
+      // Optional: Keep original CALIFICACIÓN or add puntuacion if needed elsewhere
+      // originalCalificacion: proyecto.CALIFICACIÓN,
+      // ...(typeof proyecto.CALIFICACIÓN === 'number' && { puntuacion: proyecto.CALIFICACIÓN }),
+      originalData: proyecto
+    }
+  };
+});
+
+processedProjects.sort((a, b) => {
+  // Access the original YEAR from the stored originalData
+  const yearA = a.data.originalData.YEAR;
+  const yearB = b.data.originalData.YEAR;
+
+  // Sort in descending order
+  return yearB - yearA;
+});
+
+// Extract unique categories directly from the new 'category' field
+const uniqueCategories = Array.from(new Set(proyectos.map((p) => p.category)));
+// --- End Data Processing ---
+
+const pageHeaderData = {
+  title: 'Título de Esta Nueva Página de Proyectos', // Change this title as needed
+  subtitle: 'Una descripción relevante para esta sección de la página.' // Change this subtitle as needed
+};
+---
+
+<Base
+  title={about.data.title}
+  meta_title={about.data.meta_title}
+  description={about.data.description}
+  image={about.data.image}
+>
+  <Shape />
+  <section class="page-hero py-2">
+    <div class="container">
+      <!-- <div class="page-hero-content mx-auto max-w-[768px] text-center">
+        <PageHeader page_data={page_data} />
+        </div> -->
+      <!-- <CounterComponent counter={counter} /> -->
+      <ApexChart client:only="react" />
+      <ListadoProyectos
+        client:load
+        categories={uniqueCategories}
+        projects={processedProjects}
+      />
+      <!-- <Gallery gallery={gallery} />
+      <Works features={features} /> -->
+      <OurMembers members={members} />
+    </div>
+  </section>
+</Base>

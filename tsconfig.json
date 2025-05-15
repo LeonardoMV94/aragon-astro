@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro"],
+  "include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro", "src/layouts/function-components/Servicios.jsx"],
   "exclude": ["node_modules", "dist"]
 }

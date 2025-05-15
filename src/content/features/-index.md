@@ -18,24 +18,24 @@ project_management:
   management:
     title: Project Management
     projects:
-      - title: Reduce friction
-        content: Encourage frequent & timely recognition integrating with communication tools
-        icon: lock #icon package react-feather-icon
-      - title: Reduce friction
-        content: Encourage frequent & timely recognition integrating with communication tools
-        icon: tv #icon package react-feather-icon
-      - title: Reduce friction
-        content: Encourage frequent & timely recognition integrating with communication tools
-        icon: tool #icon package react-feather-icon
-      - title: Reduce friction
-        content: Encourage frequent & timely recognition integrating with communication tools
-        icon: lock #icon package react-feather-icon
-      - title: Reduce friction
-        content: Encourage frequent & timely recognition integrating with communication tools
-        icon: tv #icon package react-feather-icon
-      - title: Reduce friction
-        content: Encourage frequent & timely recognition integrating with communication tools
-        icon: tool #icon package react-feather-icon
+      - title: Obras Viales
+        content: Diseño, pavimentación y conservación de caminos urbanos y rurales. Incluye accesos vehiculares, demarcación, señalética, movimiento de tierras y obras complementarias.
+        icon: ObrasViales.png
+      - title: Obras Civiles y Urbanización
+        content: Construcción de viviendas, edificaciones comerciales e industriales, muros de contención, espacios públicos y urbanización con redes básicas, paisajismo y alumbrado.
+        icon: Edificacion.png
+      - title: Montaje Industrial
+        content: Montaje de estructuras metálicas, galpones y plantas industriales. Instalación de equipos, piping, soldaduras y ensamblajes especializados.
+        icon: Montaje.png
+      - title: Infraestructura Sanitaria e Hidráulica
+        content: Ejecución de redes de agua potable, alcantarillado, drenaje pluvial y sistemas de riego tecnificado.
+        icon: Sanitarias.png
+      - title: Maquinaria y Servicios Complementarios
+        content: Arriendo de maquinaria pesada, transporte de materiales y mantenimiento de obras civiles menores.
+        icon: Maquinaria.png
+      - title: Estudios y Proyectos Técnicos
+        content: Asesorías, diseño de ingeniería y arquitectura, formulación de proyectos, topografía, estudios de impacto ambiental y control de calidad.
+        icon: EstudiosTecnicos.png
   feature_service:
     title: Accept payments from devices any country in this universe
     description: Donec sollicitudin molestie malesda. Donec sollitudin molestie malesuada. Mauris pellentesque nec, egestas non nisi. Cras ultricies ligula sed

@@ -7,6 +7,7 @@ import social from "@/config/social.json";
 import { markdownify } from "@/lib/utils/textConverter";
 const { footer } = menu;
 const { copyright, location, email, phone, footer_description } = config.params;
+const pctester = markdownify(copyright)
 ---
 
 <footer class="footer bg-[#F1F1F1]">
@@ -19,12 +20,12 @@ const { copyright, location, email, phone, footer_description } = config.params;
         </p>
       </div>
       <div class="col-12 mt-12 md:col-6 lg:col-3">
-        <h6>Socials</h6>
+        <h6>Redes sociales</h6>
 
         <Social source={social} className="social-icons mt-4 lg:mt-6" />
       </div>
       <div class="col-12 mt-12 md:col-6 lg:col-3">
-        <h6>Quick Links</h6>
+        <h6>Enlaces</h6>
         <ul>
           {
             footer.map((item, i) => (
@@ -38,7 +39,7 @@ const { copyright, location, email, phone, footer_description } = config.params;
         </ul>
       </div>
       <div class="col-12 mt-12 md:col-6 lg:col-3">
-        <h6>Location & Contact</h6>
+        <h6>Ubicación y contacto</h6>
         <ul>
           <li class="mb-2">{location}</li>
           <li class="mb-2">
@@ -59,7 +60,9 @@ const { copyright, location, email, phone, footer_description } = config.params;
     <div
       class="footer-copyright mx-auto border-t border-border pb-10 pt-7 text-center"
     >
-      <p class="content text-text" set:html={markdownify(copyright)} />
+      <p class="content text-text" >
+        Copyright © 2025 <a href="http://pctester.cl" target="_blank">{pctester}</a>
+      </p>
     </div>
   </div>
 </footer>

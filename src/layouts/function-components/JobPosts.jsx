@@ -1,7 +1,6 @@
 import { humanize } from "@/lib/utils/textConverter";
 import { marked } from "marked";
 import { useState } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
 const JobPosts = ({ posts, categories, career }) => {
   const [tab, setTab] = useState("");
   const filterPost = !tab
@@ -29,7 +28,7 @@ const JobPosts = ({ posts, categories, career }) => {
                   } btn btn-sm cursor-pointer`}
                   onClick={() => setTab("")}
                 >
-                  All Categories
+                  Todas las categorias
                 </span>
               </li>
               {categories.map((category, i) => (
@@ -48,7 +47,7 @@ const JobPosts = ({ posts, categories, career }) => {
         </div>
         <div className="row mt-12">
           {filterPost.map((post, i) => (
-            <div className="mb-8 md:col-6" key={`post-${i}`}>
+            <div className="mb-8 md:col-12" key={`post-${i}`}>
               <div className="rounded-xl bg-white p-5 shadow-lg lg:p-10">
                 <h3 className="h4">{post.data.title}</h3>
                 <p className="mt-6">{post.data.excerpt}</p>
@@ -85,7 +84,7 @@ const JobPosts = ({ posts, categories, career }) => {
                     </svg>
                     {post.data.location}
                   </li>
-                  <li className="my-1 mr-8">
+                  {/* <li className="my-1 mr-8">
                     <a
                       className="inline-flex items-center font-semibold text-primary"
                       href={`/careers/${post.id}`}
@@ -93,7 +92,7 @@ const JobPosts = ({ posts, categories, career }) => {
                       Read More
                       <AiOutlineArrowRight className="ml-1.5 text-xl font-bold" />
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
