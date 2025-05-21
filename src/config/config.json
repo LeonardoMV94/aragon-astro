@@ -27,7 +27,7 @@
 
   "params": {
     "footer_description": "Constructora Aragón Limitada.",
-    "email": "admin@aragonltda.cl",
+    "email": "contacto@aragonltda.cl",
     "location": "AV. Almirante Montt #239, Valparaíso, Chile",
     "phone": "+56 32 3368518",
     "contact_form_action": "#",
@@ -35,8 +35,8 @@
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "PCTester.cl",
     "meta_image": "/images/og-image.png",
-    "meta_description": "pinwheel astro"
+    "meta_description": "Constructora Aragón Limitada es una empresa dedicada a la construcción y remodelación de obras civiles, con más de 10 años de experiencia en el rubro. Nos especializamos en brindar soluciones integrales a nuestros clientes, garantizando calidad y cumplimiento en cada proyecto."
   }
 }

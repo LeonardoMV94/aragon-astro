@@ -1,12 +1,10 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { getEntry, render } from "astro:content";
+import { getEntry } from "astro:content";
 
 const entry = (await getEntry("pages", "404")) as CollectionEntry<"pages">;
-const { Content } = await render(entry);
 ---
 
 <Base title={entry.data.title}>
@@ -15,14 +13,14 @@ const { Content } = await render(entry);
       <div class="flex h-[40vh] items-center justify-center">
         <div class="text-center">
           <Image
-            src="/images/404.png"
+            src="/images/logo_sin_texto.png"
             class="mb-4 inline"
             alt="logo"
             height={120}
             width={120}
           />
-          <h1 class="mb-4" set:html={markdownify(entry.data.title)} />
-          <Content />
+          <h1 class="mb-4" set:html="404" />
+          <h3 class="mb-4" set:html="Página no encontrada" />
         </div>
       </div>
     </div>

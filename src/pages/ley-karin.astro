@@ -1,0 +1,21 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const datos = {
+  title: "Ley Karin",
+  description: ""
+}
+---
+
+<Base
+  title="Ley Karin | Constructora Aragón Ltda."
+  meta_title="Ley Karin | Constructora Aragón Ltda."
+  description=""
+>
+<section class="page-hero pb-6 pt-16 ">
+  <div class="container col-11 md:col-8 lg:col-6 mx-auto">
+    <h1 class="mb-5 mt-8 text-center" set:html={datos.title} />
+    <div class="text-base text-gray-900" set:html={datos.description} />
+  </div>
+</section>
+</Base>

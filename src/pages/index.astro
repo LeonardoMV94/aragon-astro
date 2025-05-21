@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
 import { AiFillCheckCircle } from 'react-icons/ai';
+import servicios from '@/config/servicios.json';
 
 const homepage = (await getEntry(
   'homepage',
@@ -27,6 +28,7 @@ const features = (await getEntry(
   'features',
   '-index'
 )) as CollectionEntry<'features'>;
+
 ---
 
 <Base>
@@ -79,7 +81,7 @@ const features = (await getEntry(
       }
     </div>
 
-  <ListadoServicios features={features.data} />
+  <ListadoServicios servicios={servicios} />
   <!-- <Testimonial testimonial={testimonial} /> -->
 
   <!-- TODO: aqui carrousel de proveedores -->

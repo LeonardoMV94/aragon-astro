@@ -13,7 +13,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: config.site.base_url ? config.site.base_url : "supports-fun-namely-fitted.trycloudflare.com",
   server: {
-    allowedHosts: ['instrumentation-toner-pursuit-purposes.trycloudflare.com']
+    allowedHosts: ['last-pray-automated-included.trycloudflare.com']
   },
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",

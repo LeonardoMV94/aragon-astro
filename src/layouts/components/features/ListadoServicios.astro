@@ -1,16 +1,7 @@
 ---
-import FeatureTab from "@/layouts/function-components/FeatureTab";
 import Servicios from "@/layouts/function-components/Servicios";
-import { markdownify } from "@/lib/utils/textConverter";
-import FeatureService from "./FeatureService.astro";
 
-const {
-  features: {
-    project_management: {
-      management,
-    },
-  },
-} = Astro.props;
+const {servicios} = Astro.props;
 ---
 
 <section class="section features pb-0">
@@ -20,9 +11,9 @@ const {
         <h2 set:html="Nuestros servicios" />
       </div>
     </div>
-    <div class="p mt-14 rounded-xl bg-white p-6 shadow-lg lg:px-12 lg:py-16">
+    <div class="p mt-14 ">
       <div class="row">
-        <Servicios client:load projects={management.projects} />
+        <Servicios client:load servicios={servicios} />
       </div>
     </div>
   </div>

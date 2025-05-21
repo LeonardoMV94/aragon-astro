@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Obras Viales",
+    "content": "Diseño, pavimentación y conservación de caminos urbanos y rurales. Incluye accesos vehiculares, demarcación, señalética, movimiento de tierras y obras complementarias.",
+    "icon": "ObrasViales2.png"
+  },
+  {
+    "title": "Obras Civiles y Urbanización",
+    "content": "Construcción de viviendas, edificaciones comerciales e industriales, muros de contención, espacios públicos y urbanización con redes básicas, paisajismo y alumbrado.",
+    "icon": "Edificacion2.png"
+  },
+  {
+    "title": "Montaje Industrial",
+    "content": "Montaje de estructuras metálicas, galpones y plantas industriales. Instalación de equipos, piping, soldaduras y ensamblajes especializados.",
+    "icon": "Montaje2.png"
+  },
+  {
+    "title": "Infraestructura Sanitaria e Hidráulica",
+    "content": "Ejecución de redes de agua potable, alcantarillado, drenaje pluvial y sistemas de riego tecnificado.",
+    "icon": "Sanitarias2.png"
+  },
+  {
+    "title": "Maquinaria y Servicios Complementarios",
+    "content": "Arriendo de maquinaria pesada, transporte de materiales y mantenimiento de obras civiles menores.",
+    "icon": "Maquinaria2.png"
+  },
+  {
+    "title": "Estudios y Proyectos Técnicos",
+    "content": "Asesorías, diseño de ingeniería y arquitectura, formulación de proyectos, topografía, estudios de impacto ambiental y control de calidad.",
+    "icon": "EstudiosTecnicos2.png"
+  }
+]

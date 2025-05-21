@@ -2,7 +2,43 @@ import Chart from "react-apexcharts";
 
 const ApexChart = () => {
   const options = {
-    chart: { id: "line" },
+    chart: {
+      id: "line",
+      toolbar: {
+        show: false, // 👈 Esto oculta el toolbar
+      },
+      zoom: {
+        enabled: false,
+      },
+    },
+    stroke: {
+      curve: "smooth",
+    },
+    colors: ["#f09300", "#E91E63"],
+    grid:{
+      padding: {
+        right: 40, // Ajusta este valor según sea necesario
+        left: 20,
+        top: 0,
+        bottom: 0,
+      },
+    },
+    legend: {
+      show: true,
+    },
+    dataLabels: {
+      enabled: true,
+      formatter: function (val) {
+        return `UF ${Math.round(val).toLocaleString()}`;
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return Math.round(value).toLocaleString(); // Usa separador de miles y sin decimales
+        },
+      },
+    },
     xaxis: {
       categories: [
         "2013",
@@ -16,18 +52,17 @@ const ApexChart = () => {
         "2022",
         "2023",
         "2024",
-        "2025",
       ],
     },
   };
 
   const series = [
     {
-      name: "Ventas",
+      name: "Monto de adjudicación en UF",
       data: [
         20188.71, 19598.51528, 68836.71527, 74419.43158, 37813.77569,
         76939.46869, 95881.80784, 80695.29336, 221900.0691, 98350.2513,
-        275608.0273, 30808.30552,
+        275608.0273,
       ],
     },
   ];
@@ -38,7 +73,16 @@ const ApexChart = () => {
         <div className="row">
           <div className="mx-auto text-center lg:col-12">
             <h2>Montos que nos han adjudicado </h2>
-            <Chart options={options} series={series} type="area" height={350} />
+            {/* El padding de Tailwind aquí es para el contenedor externo,
+                útil para el layout general, pero no para el corte interno del gráfico */}
+            <div className="card mt-6 shadow-lg">
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={350}
+              />
+            </div>
           </div>
         </div>
       </div>

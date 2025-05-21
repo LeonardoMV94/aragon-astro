@@ -1,50 +1,37 @@
-import { humanize } from "@/lib/utils/textConverter";
-import { Image } from "astro:assets";
-import * as Icon from "react-feather";
-
-const Projects = ({ projects }) => {
+const Servicios = ({ servicios }) => {
   return (
-    <div className="col-12 ">
-      <div className="row">
-        {projects.map((item, i) => {
-          // const FeatherIcon = Icon[humanize(item.icon)];
+    // Reemplaza col-12 con un div contenedor que define el grid
+    <div className="w-full"> {/* w-full para asegurar que ocupe todo el ancho disponible */}
+      {/* Reemplaza row con grid y define las columnas y el espacio (gap) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"> {/* gap-6 añade 24px de espacio entre las cards */}
+        {servicios.map((item, i) => {
           return (
-            <div className="lg:col-6" key={`item-${i}`}>
+            // Elimina lg:col-6 de aquí, ya que el contenedor padre (grid) ya define las columnas
+            // Añade shadow-md para una sombra base y hover:shadow-xl para una sombra más pronunciada al hacer hover
+            <div
+              className="bg-white rounded-lg shadow-md
+                         transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" // Añadida shadow-xl para la sombra de hover
+              key={`item-${i}`}
+            >
               <div
-                className={`flex items-center space-x-4 rounded-lg bg-[#fafafa] px-6 py-8 lg:mt-6  ${
-                  projects.length - 1 === i ? "mb-0" : "mb-6 "
-                } `}
+                className={`flex items-center space-x-4 px-6 py-8
+                            ${
+                              servicios.length - 1 === i && servicios.length % 2 !== 0 // Si es la última card y hay un número impar de cards
+                                ? "mb-0" // No margin-bottom
+                                : "mb-0" // El gap ya maneja el espacio vertical, no necesitamos mb-6 aquí
+                            }
+                            `} // Eliminado rounded-lg de aquí, ya lo tiene el div padre de la card
               >
                 <div className="relative inline-flex h-24 w-24 items-center justify-center p-3">
                   <span className="project-icon text-[#FA7398]">
                     <img
-                      class="absolute left-0 top-0 "
+                      className="absolute left-0 top-0" // Cambiado 'class' a 'className' para React/Astro JSX
                       src={`/public/images/servicios/${item.icon}`}
-                      alt=""
+                      alt={item.title} // Añadido alt para accesibilidad
                       width="90"
                       height="90"
                     />
                   </span>
-                  {/* <span className="project-icon text-[#FA7398]">
-                    {" "}
-                    <FeatherIcon className="font-semibold" />
-                  </span>
-                  <svg
-                    className="absolute left-0 top-0 h-full w-full"
-                    width="90"
-                    height="90"
-                    viewBox="0 0 90 90"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      opacity="0.1"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M42.8833 0.00928958C63.2143 -0.38584 82.2759 11.853 88.3264 31.1979C94.1797 49.9121 84.027 68.9907 68.0244 80.3913C52.4387 91.4948 31.5679 93.9094 16.0849 82.6642C0.66775 71.4667 -3.27813 50.9537 2.58684 32.8642C8.48561 14.6704 23.699 0.382132 42.8833 0.00928958Z"
-                      fill="#FFCC99"
-                    ></path>
-                  </svg> */}
                 </div>
                 <div>
                   <h3 className="h5 font-primary">{item.title}</h3>
@@ -59,4 +46,4 @@ const Projects = ({ projects }) => {
   );
 };
 
-export default Projects;
+export default Servicios;
