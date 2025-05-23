@@ -4,7 +4,8 @@ import { Resend } from 'resend';
 
 // Asegúrate de tener esta variable de entorno configurada en Netlify
 const RESEND_API_KEY = import.meta.env.RESEND_API_KEY;
-const TARGET_EMAIL = import.meta.env.COMPLIANCE_EMAIL_TARGET || 'tu_correo_de_compliance@ejemplo.com'; // El correo donde quieres recibir las denuncias
+const TARGET_EMAIL = import.meta.env.EMAIL_TARGET || 'tu_correo_de_compliance@ejemplo.com'; // El correo donde quieres recibir las denuncias
+const FROM_EMAIL = import.meta.env.EMAIL_FROM || 'tu_correo_de_compliance@ejemplo.com'; // El correo donde quieres recibir las denuncias
 
 const resend = new Resend(RESEND_API_KEY);
 
@@ -62,9 +63,9 @@ async function handleUrlEncodedForm(request: Request): Promise<Response> {
     `;
 
     // Envío del correo electrónico
-    if (RESEND_API_KEY && TARGET_EMAIL) {
+    if (RESEND_API_KEY && TARGET_EMAIL && FROM_EMAIL) {
       await resend.emails.send({
-        from: 'denuncias@tu-dominio-verificado.com', // **¡IMPORTANTE! Usa un dominio verificado con Resend**
+        from: FROM_EMAIL, // **¡IMPORTANTE! Usa un dominio verificado con Resend**
         to: TARGET_EMAIL,
         subject: `Nuevo Reporte de Compliance - ${data.tipoInfraccion}`,
         html: emailBody,
@@ -155,9 +156,9 @@ async function handleMultipartForm(request: Request): Promise<Response> {
     `;
 
     // Envío del correo electrónico con adjuntos
-    if (RESEND_API_KEY && TARGET_EMAIL) {
+    if (RESEND_API_KEY && TARGET_EMAIL && FROM_EMAIL) {
       await resend.emails.send({
-        from: 'denuncias@tu-dominio-verificado.com', // **¡IMPORTANTE! Usa un dominio verificado con Resend**
+        from: FROM_EMAIL, // **¡IMPORTANTE! Usa un dominio verificado con Resend**
         to: TARGET_EMAIL,
         subject: `Nuevo Reporte de Compliance (con adjuntos) - ${data.tipoInfraccion}`,
         html: emailBody,

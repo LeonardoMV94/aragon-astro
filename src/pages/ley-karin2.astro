@@ -1,0 +1,53 @@
+---
+import Base from '@/layouts/Base.astro';
+import CollapsibleSection from '@/layouts/components/CollapsibleSection.astro';
+
+const datos = {
+  title: 'Ley Karin',
+  description: ''
+};
+---
+
+<Base
+  title="Ley Karin | Constructora Aragón Ltda."
+  meta_title="Ley Karin | Constructora Aragón Ltda."
+  description=""
+>
+  <section class="page-hero pb-6 pt-16">
+    <div class="container col-11 md:col-8 lg:col-6 mx-auto">
+      <h1 class="mb-5 mt-8 text-center" set:html={datos.title} />
+      <div class="text-base text-gray-900" set:html={datos.description} />
+    </div>
+  </section>
+
+  <section class="section pt-0">
+    <div class="container">
+      <div class="row">
+        <CollapsibleSection title="¿Qué es la Ley Karin?">
+          <p class="text-base text-gray-900">
+            La Ley Karin es una ley que busca proteger a los trabajadores de la
+            construcción en Chile. Esta ley establece normas y regulaciones para
+            garantizar la seguridad y salud de los trabajadores en el sector de
+            la construcción.
+          </p>
+        </CollapsibleSection>
+        <CollapsibleSection title="¿Qué es la Ley Karin?">
+          <p class="text-base text-gray-900">
+            La Ley Karin es una ley que busca proteger a los trabajadores de la
+            construcción en Chile. Esta ley establece normas y regulaciones para
+            garantizar la seguridad y salud de los trabajadores en el sector de
+            la construcción.
+          </p>
+        </CollapsibleSection>
+        <CollapsibleSection title="¿Qué es la Ley Karin?">
+          <p class="text-base text-gray-900">
+            La Ley Karin es una ley que busca proteger a los trabajadores de la
+            construcción en Chile. Esta ley establece normas y regulaciones para
+            garantizar la seguridad y salud de los trabajadores en el sector de
+            la construcción.
+          </p>
+        </CollapsibleSection>
+      </div>
+    </div>
+  </section>
+</Base>
