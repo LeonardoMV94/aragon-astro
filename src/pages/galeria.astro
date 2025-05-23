@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import GalleryCard from '../layouts/components/GalleryCard.astro';
+import type { ImageMetadata } from 'astro';
+
+// Importa todas las imágenes JPG/JPEG de la carpeta src/assets/images/gallery/
+// NOTA IMPORTANTE: La ruta es relativa a este archivo gallery.astro
+// `{ eager: true }` es crucial para que Astro pueda procesar las imágenes en tiempo de compilación.
+const rawImages = import.meta.glob<ImageMetadata>('../assets/images/gallery/*.{jpeg,jpg}', { eager: true });
+
+
+  const images = Object.entries(rawImages).map(([path, rawModule]) => {
+
+  // Determinar si ImageMetadata está directamente o dentro de 'default'
+  let module: ImageMetadata;
+  if (rawModule && typeof rawModule === 'object' && 'default' in rawModule) {
+      module = rawModule.default as ImageMetadata; // Acceder a la propiedad 'default'
+  } else if (rawModule && typeof rawModule === 'object' && 'src' in rawModule && 'width' in rawModule) {
+      module = rawModule as ImageMetadata; // Es directamente ImageMetadata
+  } else {
+      // console.error(`¡ADVERTENCIA! El módulo para ${path} no parece ser ImageMetadata válido.`);
+      // Retornar un placeholder o omitir la imagen si no es válida
+      // Para este ejemplo, retornaremos un objeto básico para evitar errores
+      return {
+          src: { src: '', width: 1, height: 1, format: 'png' }, // Placeholder mínimo
+          alt: 'Error al cargar imagen'
+      };
+  }
+
+  // Asegúrate de que 'module' sea un objeto con al menos 'src', 'width', 'height' o 'format'
+  if (!module || typeof module !== 'object' || !('src' in module) && !('width' in module)) {
+      // console.error(`¡ERROR CRÍTICO! 'module' sigue sin ser válido después de la lógica: ${path}`);
+      return {
+          src: { src: '', width: 1, height: 1, format: 'png' },
+          alt: 'Error al cargar imagen'
+      };
+  }
+
+  return {
+    src: module, // Aquí pasamos el objeto ImageMetadata extraído correctamente
+    alt: path.split('/').pop()?.split('.')[0].replace(/[-_]/g, ' ') || 'Imagen de la galería',
+  };
+});
+
+console.log('--- DEPURACIÓN: Contenido de images final ---');
+console.log(images);
+console.log('--- FIN DEPURACIÓN ---');
+
+// Filtra cualquier imagen que pudo haber fallado en la carga
+const filteredImages = images.filter(img => img.src.src !== ''); // Filtra los placeholders de error
+
+filteredImages.sort((a, b) => a.alt.localeCompare(b.alt));
+
+---
+
+<Base
+  title="Galeria de imagenes | Constructora Aragón Ltda."
+  meta_title="galeria de imagenes | Constructora Aragón Ltda."
+  description="galeria de imagenes | Constructora Aragón Ltda."
+>
+  <section class="page-hero pb-6 pt-16">
+    <div class="container">
+      <h1 class="mb-5 mt-8" set:html="Galería de imagenes" />
+    </div>
+  </section>
+
+  <section class="section pt-0">
+    <div class="container">
+      <div class="row">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {filteredImages.map((image) => ( // Usar filteredImages
+            <GalleryCard src={image.src} alt={image.alt} />
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </section>
+</Base>

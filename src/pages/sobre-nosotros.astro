@@ -64,7 +64,7 @@ const pageHeaderData = {
       <!-- <CounterComponent counter={counter} /> -->
       <ApexChart client:only="react" />
       <ListadoProyectos
-        client:load
+        client:only="react"
         categories={uniqueCategories}
         projects={processedProjects}
       />

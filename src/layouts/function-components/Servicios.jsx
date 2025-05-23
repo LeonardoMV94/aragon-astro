@@ -26,7 +26,7 @@ const Servicios = ({ servicios }) => {
                   <span className="project-icon text-[#FA7398]">
                     <img
                       className="absolute left-0 top-0" // Cambiado 'class' a 'className' para React/Astro JSX
-                      src={`/public/images/servicios/${item.icon}`}
+                      src={`/images/servicios/${item.icon}`}
                       alt={item.title} // Añadido alt para accesibilidad
                       width="90"
                       height="90"
