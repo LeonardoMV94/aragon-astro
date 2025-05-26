@@ -1,11 +1,12 @@
 ---
-import { markdownify } from "@/lib/utils/textConverter";
-import { Image } from "astro:assets";
-const { banner } = Astro.props;
-const {  button, image } = banner;
+import { markdownify } from '@/lib/utils/textConverter';
+import { Image } from 'astro:assets';
+import bannerImage from '@/assets/images/gallery/1-(195).jpeg';
 
-const title = "Líderes en obras viales y urbanización en la Región de Valparaíso";
-const content = "Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.";
+const title =
+  'Líderes en obras viales y urbanización en la Región de Valparaíso';
+const content =
+  'Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.';
 ---
 
 <section class="section banner relative">
@@ -20,13 +21,14 @@ const content = "Construimos con enfoque técnico, eficiencia operativa y alto e
           {button.label}
         </a> -->
       </div>
-      <div class="lg:col-6">
+      <div class="lg:col-6 relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
         <Image
-          class="w-full object-contain"
-          alt="banner"
-          src={image}
-          width={603}
-          height={396}
+          src={bannerImage}
+          alt="Líderes en obras viales y urbanización en la Región de Valparaíso"
+          widths={[300, 600, 900, 1200, 1500]}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+          loading="lazy"
+          class="absolute inset-0 w-full h-full object-cover object-position-crane rounded-2xl"
         />
       </div>
     </div>
@@ -40,3 +42,41 @@ const content = "Construimos con enfoque técnico, eficiencia operativa y alto e
     height={466}
   /> -->
 </section>
+
+<style>
+  /* Base object-position - adjust these percentages based on your image
+     and where the crane is.
+     The first percentage is horizontal (0% left, 100% right)
+     The second percentage is vertical (0% top, 100% bottom) */
+  .object-position-crane {
+    object-position: 20% 20%; /* Start with center center */
+    /*
+      Example adjustments based on your image:
+      If the crane is slightly to the left, try: object-position: 40% 50%;
+      If the crane is slightly higher, try: object-position: 50% 40%;
+      You'll need to experiment with these values.
+    */
+  }
+
+  /* Optional: Adjust object-position for different screen sizes if needed */
+  @media (min-width: 768px) {
+    .object-position-crane {
+      object-position: 20% 20%;
+      /* object-position: 45% 55%; */ /* Example adjustment for medium screens */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .object-position-crane {
+      object-position: 20% 20%;
+      /* object-position: 48% 52%; */ /* Example adjustment for large screens */
+    }
+  }
+
+  /*
+    The image in your example looks like the crane might be around 45-50% horizontally
+    and perhaps 60-70% vertically down (towards the bottom of the original image,
+    if it's a wide shot), but this is a guess.
+    You'll need to use your browser's developer tools to fine-tune.
+  */
+</style>

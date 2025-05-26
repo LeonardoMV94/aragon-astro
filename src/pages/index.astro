@@ -12,26 +12,17 @@ const homepage = (await getEntry(
   'homepage',
   '-index'
 )) as CollectionEntry<'homepage'>;
-const { banner, key_features, service, testimonial } = homepage.data;
+const { banner } = homepage.data;
 
 const how_it_works = (await getEntry(
   'how-it-works',
   '-index'
 )) as CollectionEntry<'how-it-works'>;
-const { performance, our_works } = how_it_works.data;
-const page_data = {
-  ...how_it_works.data,
-  content: how_it_works.body
-};
-
-const features = (await getEntry(
-  'features',
-  '-index'
-)) as CollectionEntry<'features'>;
+const { our_works } = how_it_works.data;
 ---
 
 <Base>
-  <Banner banner={banner} />
+  <Banner />
   <section class="page-hero py-2">
     <!-- <KeyFeatures key_features={key_features} /> -->
     <!-- <Service service={service} /> -->
@@ -47,10 +38,12 @@ const features = (await getEntry(
             >
               <div class="relative">
                 <Image
-                  class="w-full object-contain"
+                  class="w-full object-contain rounded-2xl"
                   alt="service"
                   width={473}
                   height={286}
+                  loading="lazy"
+                  decoding="async"
                   src={item.image}
                 />
               </div>

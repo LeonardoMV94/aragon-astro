@@ -15,7 +15,7 @@
     "icon": "Montaje2.png"
   },
   {
-    "title": "Infraestructura Sanitaria e Hidráulica",
+    "title": "Infraestructura Sanitaria",
     "content": "Ejecución de redes de agua potable, alcantarillado, drenaje pluvial y sistemas de riego tecnificado.",
     "icon": "Sanitarias2.png"
   },
@@ -25,7 +25,7 @@
     "icon": "Maquinaria2.png"
   },
   {
-    "title": "Estudios y Proyectos Técnicos",
+    "title": "Estudios de Ingeniería",
     "content": "Asesorías, diseño de ingeniería y arquitectura, formulación de proyectos, topografía, estudios de impacto ambiental y control de calidad.",
     "icon": "EstudiosTecnicos2.png"
   }
