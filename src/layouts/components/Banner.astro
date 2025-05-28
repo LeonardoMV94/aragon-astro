@@ -6,11 +6,11 @@ import bannerImage from '@/assets/images/gallery/1-(195).jpeg';
 const title =
   'Líderes en obras viales y urbanización en la Región de Valparaíso';
 const content =
-  'Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.';
+  'Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.';
 ---
 
-<section class="section banner relative">
-  <div class="container">
+<section class="section banner relative " >
+  <div class="container " >
     <div class="row items-center">
       <div class="lg:col-6">
         <h1 class="banner-title" set:html={markdownify(title)} />
@@ -28,7 +28,8 @@ const content =
           widths={[300, 600, 900, 1200, 1500]}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
           loading="lazy"
-          class="absolute inset-0 w-full h-full object-cover object-position-crane rounded-2xl"
+          data-taos-offset="300"
+          class="absolute inset-0 w-full h-full object-cover object-position-crane rounded-2xl "
         />
       </div>
     </div>

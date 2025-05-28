@@ -9,7 +9,7 @@ const Servicios = ({ servicios }) => {
             // Elimina lg:col-6 de aquí, ya que el contenedor padre (grid) ya define las columnas
             // Añade shadow-md para una sombra base y hover:shadow-xl para una sombra más pronunciada al hacer hover
             <div
-              className="bg-white rounded-lg shadow-md
+              className="bg-white rounded-lg shadow-md 
                          transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl" // Añadida shadow-xl para la sombra de hover
               key={`item-${i}`}
             >

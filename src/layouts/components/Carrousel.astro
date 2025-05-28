@@ -1,0 +1,192 @@
+---
+import { Image } from 'astro:assets';
+
+// Define las interfaces para los props
+interface Item {
+  nombre: string;
+  logo: string;
+}
+
+interface Props {
+  items: Item[]; // El array de objetos (clientes, proveedores, etc.)
+  heading: string; // Título principal del carrusel
+  folderAssets: string; // La subcarpeta dentro de assets/images donde están los logos (ej. 'clientes' o 'proveedores')
+}
+
+// Extrae los props que se le pasarán al componente
+const { items, folderAssets, heading = 'test' } = Astro.props;
+
+// =========================================================================
+// === CAMBIO CLAVE AQUÍ: Cargar TODOS los logos de las subcarpetas esperadas ===
+// =========================================================================
+// Asumimos que tus logos están en 'assets/images/clientes/' o 'assets/images/proveedores/'.
+// Si tienes otras carpetas, agrégalas al patrón del glob (ej. '*/').
+// O si es solo una carpeta genérica, usa '../../assets/images/logos/*.{png,jpg,webp,svg}'.
+// Este patrón de glob DEBE SER ESTATICO y abarcador para que Vite lo pueda resolver.
+const allRawLogos = import.meta.glob<{ default: string }>('@/assets/**/*.{jpg,png,webp,gif,svg}', {
+  eager: true
+});
+// Transforma 'allRawLogos' en un mapa fácil de usar (nombre_archivo -> objeto_imagen_optimizado)
+// Ahora, el 'path' contendrá la subcarpeta (ej. '../../assets/images/clientes/logo.png')
+const logosMap = new Map();
+Object.entries(allRawLogos).forEach(([path, module]) => {
+  const parts = path.split('/');
+  const subfolder = parts[parts.length - 2]; // 'clientes' o 'proveedores'
+  const filename = parts[parts.length - 1]; // 'logo1.png', etc.
+
+  if (subfolder === folderAssets) {
+    logosMap.set(filename, module.default);
+  }
+});
+
+// =========================================================
+// === VARIABLES DE CONFIGURACIÓN DEL CARRUSEL ===
+// =========================================================
+const scaleFactor = 1.4;
+const logoMarginX = 50;
+const animationSpeedFactor = 0.8;
+// =========================================================
+
+// Dimensiones BASE de los logos
+const baseImageWidth = 150;
+const baseImageHeight = 75;
+const baseSlideHeight = 100;
+
+// Calcula las dimensiones escaladas
+const scaledImageWidth = Math.round(baseImageWidth * scaleFactor);
+const scaledImageHeight = Math.round(baseImageHeight * scaleFactor);
+const scaledSlideHeight = Math.round(baseSlideHeight * scaleFactor);
+const scaledContainerMinHeight = Math.round(scaledSlideHeight * 1.5);
+
+// Prepara los datos para el carrusel buscando las fuentes de las imágenes.
+const carouselItems = items
+  .map((item) => {
+    const logoSrc = logosMap.get(item.logo); // Usa el mapa filtrado
+    if (!logoSrc) {
+      console.warn(
+        `Logo no encontrado para "${item.nombre}": "${item.logo}" en la carpeta esperada "${folderAssets}". Asegúrate de que el nombre del archivo en tus datos coincida y la carpeta sea correcta.`
+      );
+      return null;
+    }
+    return {
+      src: logoSrc,
+      alt: `Logo de ${item.nombre}`,
+      id: `logo-${item.nombre.replace(/\s+/g, '-')}`
+    };
+  })
+  .filter(Boolean);
+
+// Si no hay ítems válidos para mostrar, no renderizar nada
+if (carouselItems.length === 0) {
+  console.warn(
+    'No hay ítems válidos (clientes/proveedores) para mostrar en el carrusel. Revisa los datos pasados y la ruta de la carpeta de imágenes.'
+  );
+  return '';
+}
+
+// =========================================================
+// === NUEVA LÓGICA PARA REPETIR LOS ITEMS MÚLTIPLES VECES ===
+// =========================================================
+const numberOfClones = 3; // Cantidad de veces que se clonará el array original
+const fullCarouselContent = [...carouselItems]; // Empieza con el original
+
+for (let i = 0; i < numberOfClones; i++) {
+  fullCarouselContent.push(...carouselItems); // Añade clones
+}
+
+// =========================================================
+// === CÁLCULO DE LA ANIMACIÓN PARA UN BUCLE SUAVE SIN SALTO ===
+// =========================================================
+const widthPerItemAndGap = scaledImageWidth + logoMarginX;
+const totalWidthOfOneSet =
+  carouselItems.length * widthPerItemAndGap - logoMarginX;
+const animationDuration = (totalWidthOfOneSet / 50) * animationSpeedFactor;
+const animationFinalTranslateX = -totalWidthOfOneSet;
+// =========================================================
+
+// Construir la cadena de estilo fuera del JSX para mayor claridad (opcional, pero ayuda a depurar)
+const carouselStyles = `
+  --scaledContainerMinHeight: ${scaledContainerMinHeight}px;
+  --animation-duration: ${animationDuration}s;
+  --scaledImageWidth: ${scaledImageWidth}px;
+  --scaledImageHeight: ${scaledImageHeight}px;
+  --scaledSlideHeight: ${scaledSlideHeight}px;
+  --logoMarginX: ${logoMarginX}px;
+  --animation-final-translate-x: ${animationFinalTranslateX}px;
+`;
+---
+
+<section class="bg-white py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-12">
+      {heading}
+    </h2>
+
+    <div
+      class="relative overflow-hidden carousel-wrapper"
+      style={carouselStyles}
+    >
+      <div class="logo-carousel-container">
+        {
+          fullCarouselContent.map((logo) => (
+            <div class="logo-slide" >
+              <Image
+                src={logo!.src}
+                alt={logo!.alt}
+                width={scaledImageWidth}
+                height={scaledImageHeight}
+                class={`object-contain w-full h-full`}
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: var(--scaledContainerMinHeight);
+  }
+
+  .logo-carousel-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    animation: scroll-logos var(--animation-duration) linear infinite;
+    gap: var(--logoMarginX);
+  }
+
+  .logo-slide {
+    flex-shrink: 0;
+    width: var(--scaledImageWidth);
+    height: var(--scaledSlideHeight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  @keyframes scroll-logos {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(var(--animation-final-translate-x));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .logo-carousel-container {
+      animation-duration: calc(var(--animation-duration) * 0.7);
+    }
+  }
+</style>
+
+<script>
+  // Script vacío.
+</script>

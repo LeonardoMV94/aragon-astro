@@ -7,6 +7,9 @@ import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import servicios from '@/config/servicios.json';
+import Carrousel from '@/components/Carrousel.astro';
+import clientes from '@/config/clientes.json';
+import proveedores from '@/config/proveedores.json'
 
 const homepage = (await getEntry(
   'homepage',
@@ -23,7 +26,7 @@ const { our_works } = how_it_works.data;
 
 <Base>
   <Banner />
-  <section class="page-hero py-2">
+  <article class="page-hero py-2">
     <!-- <KeyFeatures key_features={key_features} /> -->
     <!-- <Service service={service} /> -->
 
@@ -72,17 +75,18 @@ const { our_works } = how_it_works.data;
         ))
       }
     </div>
-
+    <Carrousel items={proveedores} heading='Algunos de nuestros proveedores' folderAssets="proveedores" />
     <ListadoServicios servicios={servicios} />
     <!-- <Testimonial testimonial={testimonial} /> -->
 
     <!-- TODO: aqui carrousel de proveedores -->
+    <Carrousel items={clientes} heading='Algunos de nuestros clientes' folderAssets="clientes" />
 
     <!-- contacto -->
 
-    <section class="section pt-0">
+    <section class="section pt-0 delay-[400ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0" data-taos-offset="500">
       <div class="container">
-        <h1 class="mb-5 mt-8 text-center pt-16 pb-8 " set:html="Contáctenos" />
+        <h2 class="mb-5 text-4xl mt-8 text-center pt-16 pb-8 " set:html="Contáctenos" />
       </div>
       <div class="container">
         <div class="row">
@@ -167,7 +171,7 @@ const { our_works } = how_it_works.data;
         </div>
       </div>
     </section>
-  </section>
+  </article>
 </Base>
 
 <style>

@@ -13,7 +13,7 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   site: config.site.base_url ? config.site.base_url : "supports-fun-namely-fitted.trycloudflare.com",
   server: {
-    allowedHosts: ['sierra-completing-towers-here.trycloudflare.com']
+    allowedHosts: ['myrtle-boots-compact-engaging.trycloudflare.com']
   },
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",

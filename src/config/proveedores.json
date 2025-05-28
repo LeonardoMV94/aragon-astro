@@ -1,90 +1,78 @@
 [
   {
-    "proveedor": "Melón",
-    "logo": "https://www.melon.cl/wp-content/uploads/2020/07/logo-melon.png"
+    "nombre": "Melón",
+    "logo": "melon.png"
   },
   {
-    "proveedor": "Prodalam",
-    "logo": "https://www.prodalam.cl/wp-content/uploads/2020/06/logo-prodalam.png"
+    "nombre": "Prodalam",
+    "logo": "prodalam.png"
   },
   {
-    "proveedor": "Polpaico",
-    "logo": "https://www.polpaico.cl/wp-content/uploads/2021/03/logo-polpaico.png"
+    "nombre": "Polpaico",
+    "logo": "polpaico.webp"
   },
   {
-    "proveedor": "Dimasa",
-    "logo": "https://www.dimasa.cl/wp-content/uploads/2020/08/logo-dimasa.png"
+    "nombre": "Dimasa",
+    "logo": "dimasa.png"
   },
   {
-    "proveedor": "Sodimac",
-    "logo": "https://www.sodimac.cl/static/videsk/logo.png"
+    "nombre": "Sodimac",
+    "logo": "sodimac.webp"
   },
   {
-    "proveedor": "Pernoval",
-    "logo": "https://www.pernoval.cl/wp-content/uploads/2021/05/logo-pernoval.png"
+    "nombre": "Pernoval",
+    "logo": "pernoval.png"
   },
   {
-    "proveedor": "Vigomaq",
-    "logo": "https://www.vigomaq.cl/wp-content/uploads/2020/09/logo-vigomaq.png"
+    "nombre": "Vigomaq",
+    "logo": "vigomaq.png"
   },
   {
-    "proveedor": "Áridos Madariaga",
-    "logo": "https://aridosmadariaga.cl/wp-content/uploads/2020/07/logo-aridos-madariaga.png"
+    "nombre": "Áridos Madariaga",
+    "logo": "maradiaga.png"
   },
   {
-    "proveedor": "BIM",
-    "logo": "https://www.bim.cl/wp-content/uploads/2020/06/logo-bim.png"
+    "nombre": "Cementos Bío Bío",
+    "logo": "cbb.jpg"
   },
   {
-    "proveedor": "Cementos Bío Bío",
-    "logo": "https://www.cbb.cl/wp-content/uploads/2020/07/logo-cbb.png"
+    "nombre": "Aconcret",
+    "logo": "aconcret.png"
   },
   {
-    "proveedor": "Dokre",
-    "logo": "https://www.dokre.cl/wp-content/uploads/2020/08/logo-dokre.png"
+    "nombre": "Grau",
+    "logo": "grau.gif"
   },
   {
-    "proveedor": "Aconcret",
-    "logo": "https://www.aconcret.cl/wp-content/uploads/2020/09/logo-aconcret.png"
+    "nombre": "Easy",
+    "logo": "easy.png"
   },
   {
-    "proveedor": "Grau",
-    "logo": "https://www.grau.cl/wp-content/uploads/2020/07/logo-grau.png"
+    "nombre": "SKC",
+    "logo": "skc.png"
   },
   {
-    "proveedor": "Easy",
-    "logo": "https://www.easy.cl/static/videsk/logo.png"
+    "nombre": "Finning",
+    "logo": "finning.png"
   },
   {
-    "proveedor": "SKC",
-    "logo": "https://www.skc.cl/wp-content/uploads/2020/07/logo-skc.png"
+    "nombre": "Full EPP",
+    "logo": "full-epp.webp"
   },
   {
-    "proveedor": "Finning",
-    "logo": "https://www.finning.cl/wp-content/uploads/2020/08/logo-finning.png"
+    "nombre": "PetroAmérica",
+    "logo": "petroamerica.png"
   },
   {
-    "proveedor": "Full EPP",
-    "logo": "https://www.fullepp.cl/wp-content/uploads/2020/09/logo-full-epp.png"
+    "nombre": "Kaufmann",
+    "logo": "kaufmann.png"
   },
   {
-    "proveedor": "PetroAmérica",
-    "logo": "https://www.petroamerica.cl/wp-content/uploads/2020/07/logo-petroamerica.png"
+    "nombre": "Maremosso",
+    "logo": "maremosso.png"
   },
   {
-    "proveedor": "Kaufmann",
-    "logo": "https://www.kaufmann.cl/o/kaufmann-general-theme/images/kaufmann/kaufmann.svg"
-  },
-  {
-    "proveedor": "Maremosso",
-    "logo": "https://www.maremosso.cl/wp-content/uploads/2020/09/logo-maremosso.png"
-  },
-  {
-    "proveedor": "Ambipar",
-    "logo": "https://www.ambipar.com/wp-content/uploads/2020/07/logo-ambipar.png"
-  },
-  {
-    "proveedor": "Disal",
-    "logo": "https://www.disal.cl/wp-content/uploads/2020/08/logo-disal.png"
+    "nombre": "Ambipar",
+    "logo": "ambipar.webp"
   }
 ]
