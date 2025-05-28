@@ -1,83 +1,43 @@
 ---
-import { markdownify } from '@/lib/utils/textConverter';
-import { Image } from 'astro:assets';
-import bannerImage from '@/assets/images/gallery/1-(195).jpeg';
-
 const title =
   'Líderes en obras viales y urbanización en la Región de Valparaíso';
 const content =
   'Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.';
 ---
 
-<section class="section banner relative " >
-  <div class="container " >
-    <div class="row items-center">
-      <div class="lg:col-6">
-        <h1 class="banner-title" set:html={markdownify(title)} />
+<section class="relative w-full h-[500px]  overflow-hidden">
+  <!-- Fondo con parallax -->
+  <div
+    class="absolute inset-0 bg-banner bg-cover bg-no-repeat bg-fixed bg-left-top"
+  ></div>
 
-        <p class="mt-6" set:html={markdownify(content)} />
+  <!-- Capa oscura con blur -->
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-10"></div>
 
-        <!-- <a class="btn btn-white mt-8" href={button.link}>
-          {button.label}
-        </a> -->
-      </div>
-      <div class="lg:col-6 relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
-        <Image
-          src={bannerImage}
-          alt="Líderes en obras viales y urbanización en la Región de Valparaíso"
-          widths={[300, 600, 900, 1200, 1500]}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
-          loading="lazy"
-          data-taos-offset="300"
-          class="absolute inset-0 w-full h-full object-cover object-position-crane rounded-2xl "
-        />
-      </div>
+  <!-- Contenido -->
+  <div class="relative z-20 container h-full flex items-center">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl font-bold text-white" set:html={title} />
+      <p class="mt-6 text-lg text-white" set:html={content} />
     </div>
   </div>
-
-  <!-- <Image
-    class="banner-shape absolute -top-28 right-0 -z-[1] w-full max-w-[30%]"
-    alt="banner"
-    src="/images/banner-shape.png"
-    width={496}
-    height={466}
-  /> -->
 </section>
 
 <style>
-  /* Base object-position - adjust these percentages based on your image
-     and where the crane is.
-     The first percentage is horizontal (0% left, 100% right)
-     The second percentage is vertical (0% top, 100% bottom) */
-  .object-position-crane {
-    object-position: 20% 20%; /* Start with center center */
-    /*
-      Example adjustments based on your image:
-      If the crane is slightly to the left, try: object-position: 40% 50%;
-      If the crane is slightly higher, try: object-position: 50% 40%;
-      You'll need to experiment with these values.
-    */
+  .bg-banner {
+    background-image: url('/src/assets/images/gallery/1-(195).jpeg');
+    background-position: 25% 30%; /* Primer tercio (tractor a la izquierda y arriba) */
   }
 
-  /* Optional: Adjust object-position for different screen sizes if needed */
   @media (min-width: 768px) {
-    .object-position-crane {
-      object-position: 20% 20%;
-      /* object-position: 45% 55%; */ /* Example adjustment for medium screens */
+    .bg-banner {
+      background-position: 20% 25%;
     }
   }
 
   @media (min-width: 1024px) {
-    .object-position-crane {
-      object-position: 20% 20%;
-      /* object-position: 48% 52%; */ /* Example adjustment for large screens */
+    .bg-banner {
+      background-position: 18% 22%;
     }
   }
-
-  /*
-    The image in your example looks like the crane might be around 45-50% horizontally
-    and perhaps 60-70% vertically down (towards the bottom of the original image,
-    if it's a wide shot), but this is a guess.
-    You'll need to use your browser's developer tools to fine-tune.
-  */
 </style>
