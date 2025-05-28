@@ -16,10 +16,10 @@ export default defineConfig({
     allowedHosts: ['myrtle-boots-compact-engaging.trycloudflare.com']
   },
   base: config.site.base_path ? config.site.base_path : "/",
-  trailingSlash: config.site.trailing_slash ? "always" : "never",
-  vite: { plugins: [tailwindcss()] },
-  adapter: netlify(),
   output: "server",
+  adapter: netlify(),
+  vite: { plugins: [tailwindcss()] },
+  trailingSlash: config.site.trailing_slash ? "always" : "never",
   integrations: [
     react(),
     sitemap(),
