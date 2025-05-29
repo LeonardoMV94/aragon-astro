@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 
 import config from '@/config/config.json';
 import Base from '@/layouts/Base.astro';
@@ -33,185 +32,190 @@ const datos = {
   meta_title="Canal de denuncias | Constructora Aragón Ltda."
   description={contact.description}
 >
-  <section class="page-hero pb-6 pt-16">
-    <div class="container col-11 md:col-8 lg:col-6 mx-auto">
-      <h1 class="mb-5 mt-8 text-center" set:html={datos.title} />
-      <div class="text-base text-gray-900" set:html={datos.description} />
-    </div>
-  </section>
+  <!-- <section class="page-hero pb-6 pt-16">
 
-  <section class="section pt-0">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="card py-10 col-11 md:col-10 lg:col-10">
-          <form
-            class="lg:mx-4 mx-auto"
-            action="/api/functions/compliance"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            <CollapsibleSection title="Datos de la denuncia">
-              <div class="form-group mb-5">
-                <label class="form-label" for="fecha">Fecha:</label>
-                <input
-                  class="form-control"
-                  type="date"
-                  id="fecha"
-                  name="fecha"
-                  placeholder="dd-mm-aaaa"
-                />
-              </div>
+  </section> -->
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="horario">Horario:</label>
-                <input
-                  class="form-control"
-                  type="time"
-                  id="horario"
-                  name="horario"
-                  placeholder="--:--"
-                />
-              </div>
+  <section class="pt-0">
+    <div class="max-w-3xl w-full mx-auto px-4">
+      <div class="text-center">
+        <h1 class="mb-5 mt-8 text-3xl font-bold" set:html={datos.title} />
+        <div
+          class="text-base text-justify text-gray-900"
+          set:html={datos.description}
+        />
+      </div>
+      <div class="my-10 w-full">
+        <form
+          class="lg:mx-4 mx-auto"
+          action="/api/functions/compliance"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <CollapsibleSection title="Datos de la denuncia">
+            <div class="form-group mb-5">
+              <label class="form-label" for="fecha">Fecha:</label>
+              <input
+                class="form-control"
+                type="date"
+                id="fecha"
+                name="fecha"
+                placeholder="dd-mm-aaaa"
+              />
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="lugarIncidente"
-                  >Lugar donde ha sucedido el incidente:</label
-                >
-                <input
-                  class="form-control"
-                  type="text"
-                  id="lugarIncidente"
-                  name="lugarIncidente"
-                  placeholder="Lugar del incidente"
-                />
-              </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="horario">Horario:</label>
+              <input
+                class="form-control"
+                type="time"
+                id="horario"
+                name="horario"
+                placeholder="--:--"
+              />
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="incumplimientoAsociado"
-                  >Incumplimiento asociado a:</label
-                >
-                <select
-                  name="incumplimientoAsociado"
-                  id="incumplimientoAsociado"
-                  class="form-select"
-                  required
-                >
-                  <option value="">Selecciona una opción</option>
-                  <option value="Código de Ética">Código de Ética</option>
-                  <option value="Eventuales delitos">Eventuales delitos</option>
-                  <option value="Infracciones al Manual de prevención">Infracciones al Manual de prevención</option>
-                  <option value="Otros">Otros</option>
-                </select>
-              </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="lugarIncidente"
+                >Lugar donde ha sucedido el incidente:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="lugarIncidente"
+                name="lugarIncidente"
+                placeholder="Lugar del incidente"
+              />
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="tipoInfraccion"
-                  >Tipo de infracción relacionada con:</label
+            <div class="form-group mb-5">
+              <label class="form-label" for="incumplimientoAsociado"
+                >Incumplimiento asociado a:</label
+              >
+              <select
+                name="incumplimientoAsociado"
+                id="incumplimientoAsociado"
+                class="form-select"
+                required
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="Código de Ética">Código de Ética</option>
+                <option value="Eventuales delitos">Eventuales delitos</option>
+                <option value="Infracciones al Manual de prevención"
+                  >Infracciones al Manual de prevención</option
                 >
-                <select
-                  name="tipoInfraccion"
-                  id="tipoInfraccion"
-                  class="form-select"
-                  required
-                >
-                  <option value="">Selecciona una opción</option>
-                  <option
-                    value="Aceptación de dinero o especies avaluadas en dinero"
-                    >Aceptación de dinero o especies avaluadas en dinero</option
-                  >
-                  <option
-                    value="Robo o hurto de dinero, información u otros valores"
-                    >Robo o hurto de dinero, información u otros valores</option
-                  >
-                  <option value="Corrupción entre particulares"
-                    >Corrupción entre particulares</option
-                  >
-                  <option value="Cohecho a funcionario público"
-                    >Cohecho a funcionario público</option
-                  >
-                  <option value="Delitos informáticos"
-                    >Delitos informáticos</option
-                  >
-                  <option value="Incumplimiento normativa interna"
-                    >Incumplimiento normativa interna</option
-                  >
-                  <option value="Otros">Otros</option>
-                </select>
-              </div>
+                <option value="Otros">Otros</option>
+              </select>
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="colaboradoresInvolucrados"
-                  >Colaboradores involucrados:</label
+            <div class="form-group mb-5">
+              <label class="form-label" for="tipoInfraccion"
+                >Tipo de infracción relacionada con:</label
+              >
+              <select
+                name="tipoInfraccion"
+                id="tipoInfraccion"
+                class="form-select"
+                required
+              >
+                <option value="">Selecciona una opción</option>
+                <option
+                  value="Aceptación de dinero o especies avaluadas en dinero"
+                  >Aceptación de dinero o especies avaluadas en dinero</option
                 >
-                <select
-                  name="colaboradoresInvolucrados"
-                  id="colaboradoresInvolucrados"
-                  class="form-select"
-                  required
+                <option
+                  value="Robo o hurto de dinero, información u otros valores"
+                  >Robo o hurto de dinero, información u otros valores</option
                 >
-                  <option value="">Selecciona una opción</option>
-                  <option value="colaborador1">Interno</option>
-                  <option value="externo">Externo</option>
-                  <option value="ambos">Ambos</option>
-                  <option value="nosabe">No sabe</option>
-                </select>
-              </div>
+                <option value="Corrupción entre particulares"
+                  >Corrupción entre particulares</option
+                >
+                <option value="Cohecho a funcionario público"
+                  >Cohecho a funcionario público</option
+                >
+                <option value="Delitos informáticos"
+                  >Delitos informáticos</option
+                >
+                <option value="Incumplimiento normativa interna"
+                  >Incumplimiento normativa interna</option
+                >
+                <option value="Otros">Otros</option>
+              </select>
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="identificacionInvolucrados"
-                  >Identificación de él o los involucrados:</label
-                >
-                <input
-                  class="form-control"
-                  type="text"
-                  id="identificacionInvolucrados"
-                  name="identificacionInvolucrados"
-                  placeholder="Datos del/los involucrados (nombre, apellido, cargo y área)"
-                />
-              </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="colaboradoresInvolucrados"
+                >Colaboradores involucrados:</label
+              >
+              <select
+                name="colaboradoresInvolucrados"
+                id="colaboradoresInvolucrados"
+                class="form-select"
+                required
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="colaborador1">Interno</option>
+                <option value="externo">Externo</option>
+                <option value="ambos">Ambos</option>
+                <option value="nosabe">No sabe</option>
+              </select>
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="detallesInfraccion"
-                  >Detalles relacionados con la presunta infracción:</label
-                >
-                <textarea
-                  class="form-control"
-                  id="detallesInfraccion"
-                  name="detallesInfraccion"
-                  cols="30"
-                  rows="6"
-                  placeholder="Describa la infracción (inclusive las ubicaciones de los testigos y cualquier otra información que pueda ser valiosa en la evaluación y resolución final de esta situación.)"
-                ></textarea>
-              </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="identificacionInvolucrados"
+                >Identificación de él o los involucrados:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="identificacionInvolucrados"
+                name="identificacionInvolucrados"
+                placeholder="Datos del/los involucrados (nombre, apellido, cargo y área)"
+              />
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="periodoHechos"
-                  >Periodo en el que han estado ocurriendo los hechos:</label
-                >
-                <input
-                  class="form-control"
-                  type="text"
-                  id="periodoHechos"
-                  name="periodoHechos"
-                  placeholder="Ingrese un período"
-                />
-              </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="detallesInfraccion"
+                >Detalles relacionados con la presunta infracción:</label
+              >
+              <textarea
+                class="form-control"
+                id="detallesInfraccion"
+                name="detallesInfraccion"
+                cols="30"
+                rows="6"
+                placeholder="Describa la infracción (inclusive las ubicaciones de los testigos y cualquier otra información que pueda ser valiosa en la evaluación y resolución final de esta situación.)"
+              ></textarea>
+            </div>
 
-              <div class="form-group mb-5">
-                <label class="form-label" for="formaConocimiento"
-                  >Forma en que ha tomado conocimiento de la información:</label
-                >
-                <input
-                  class="form-control"
-                  type="text"
-                  id="formaConocimiento"
-                  name="formaConocimiento"
-                  placeholder="Ingrese información"
-                />
-              </div>
-            </CollapsibleSection>
+            <div class="form-group mb-5">
+              <label class="form-label" for="periodoHechos"
+                >Periodo en el que han estado ocurriendo los hechos:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="periodoHechos"
+                name="periodoHechos"
+                placeholder="Ingrese un período"
+              />
+            </div>
 
-            <!-- <div class="form-group mb-5">
+            <div class="form-group mb-5">
+              <label class="form-label" for="formaConocimiento"
+                >Forma en que ha tomado conocimiento de la información:</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                id="formaConocimiento"
+                name="formaConocimiento"
+                placeholder="Ingrese información"
+              />
+            </div>
+          </CollapsibleSection>
+
+          <!-- <div class="form-group mb-5">
               <label class="form-label" for="archivoRespaldo"
                 >Adjuntar información de respaldo.</label
               >
@@ -227,83 +231,81 @@ const datos = {
               >
             </div> -->
 
-            <!-- <h3 class="h5 mb-4 mt-8">Datos de contacto</h3> -->
-            <CollapsibleSection title="Datos de contacto">
-              <div class="form-group mb-5">
-                <label class="form-label" for="name">Nombre:</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Nombre completo"
-                />
-              </div>
-
-              <div class="form-group mb-5">
-                <label class="form-label" for="email">Correo electrónico:</label
-                >
-                <input
-                  class="form-control"
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="correo@correo.com"
-                />
-              </div>
-
-              <div class="form-group mb-5">
-                <label class="form-label" for="telefonoContacto"
-                  >Teléfono de contacto:</label
-                >
-                <input
-                  class="form-control"
-                  type="tel"
-                  id="telefonoContacto"
-                  name="telefonoContacto"
-                  placeholder="+56987654321"
-                />
-              </div>
-
-              <div class="form-group mb-5">
-                <label class="form-label mb-2"
-                  >¿Autoriza que el Encargado de Prevención de Delitos trate la
-                  información proporcionada de manera confidencial antes,
-                  durante y después de finalizada la revisión?</label
-                >
-                <div class="flex items-center space-x-4">
-                  <label class="inline-flex items-center">
-                    <input
-                      type="radio"
-                      class="form-radio"
-                      name="confidencialidad"
-                      id="confidencialSi"
-                      value="si"
-                      checked
-                    />
-                    <span class="ml-2">Sí</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input
-                      type="radio"
-                      class="form-radio"
-                      name="confidencialidad"
-                      id="confidencialNo"
-                      value="no"
-                    />
-                    <span class="ml-2">No</span>
-                  </label>
-                </div>
-              </div>
-
+          <!-- <h3 class="h5 mb-4 mt-8">Datos de contacto</h3> -->
+          <CollapsibleSection title="Datos de contacto">
+            <div class="form-group mb-5">
+              <label class="form-label" for="name">Nombre:</label>
               <input
-                class="btn btn-primary block w-full"
-                type="submit"
-                value="Enviar"
+                class="form-control"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Nombre completo"
               />
-            </CollapsibleSection>
-          </form>
-        </div>
+            </div>
+
+            <div class="form-group mb-5">
+              <label class="form-label" for="email">Correo electrónico:</label>
+              <input
+                class="form-control"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="correo@correo.com"
+              />
+            </div>
+
+            <div class="form-group mb-5">
+              <label class="form-label" for="telefonoContacto"
+                >Teléfono de contacto:</label
+              >
+              <input
+                class="form-control"
+                type="tel"
+                id="telefonoContacto"
+                name="telefonoContacto"
+                placeholder="+56987654321"
+              />
+            </div>
+
+            <div class="form-group mb-5">
+              <label class="form-label mb-2"
+                >¿Autoriza que el Encargado de Prevención de Delitos trate la
+                información proporcionada de manera confidencial antes, durante
+                y después de finalizada la revisión?</label
+              >
+              <div class="flex items-center space-x-4">
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    class="form-radio"
+                    name="confidencialidad"
+                    id="confidencialSi"
+                    value="si"
+                    checked
+                  />
+                  <span class="ml-2">Sí</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    class="form-radio"
+                    name="confidencialidad"
+                    id="confidencialNo"
+                    value="no"
+                  />
+                  <span class="ml-2">No</span>
+                </label>
+              </div>
+            </div>
+
+            <input
+              class="btn btn-primary block w-full"
+              type="submit"
+              value="Enviar"
+            />
+          </CollapsibleSection>
+        </form>
       </div>
     </div>
   </section>

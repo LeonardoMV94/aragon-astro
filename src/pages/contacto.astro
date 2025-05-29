@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 
 import config from '@/config/config.json';
 import Base from '@/layouts/Base.astro';
@@ -17,6 +16,8 @@ const page_data = {
   ...contact,
   content: entry.body
 };
+
+const description = `Tienes dudas, comentarios o sugerencias? ¡Nos encantaría saber de ti! Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.`;
 ---
 
 <Base
@@ -26,34 +27,20 @@ const page_data = {
   image={contact.image}
 >
   <section class="page-hero pb-6 pt-16">
-    <div class="container">
-      <h1 class="mb-5 mt-8" set:html="Formulario de contacto" />
+    <div class="container col-11 md:col-8 lg:col-6 mx-auto">
+      <div class="row justify-center">
+        <h1 class="text-center" set:html="Contáctanos!" />
+        <p class="text-base text-center text-gray-900" set:html={description} />
+      </div>
     </div>
   </section>
 
-  <section class="section pt-0">
-    <div class="container">
-      <div class="row">
-        <div class="mb-10 text-center md:col-6 md:order-2 md:mb-0 md:pt-9">
-          <div class="contact-img relative inline-flex pb-5 pl-5">
-            <Image
-              src="/images/contact-img.png"
-              height={544}
-              width={500}
-              alt=""
-            />
-            <Image
-              class="absolute bottom-0 left-0 -z-[1] h-14 w-14"
-              src="/images/shape-2.png"
-              alt=""
-              height={56}
-              width={56}
-            />
-          </div>
-        </div>
-        <div class="md:col-6 md:order-1">
+  <section class="section pt-0 mx-auto">
+    <div class="container col-11 md:col-8 lg:col-6 mx-auto">
+      <div class="row justify-center">
+        <div class="py-10 col-11 md:col-10 lg:col-10">
           <form
-            class="lg:max-w-[484px]"
+            class="lg:mx-4 mx-auto"
             action={contact_form_action}
             method="POST"
             name="contact"

@@ -15,22 +15,18 @@ buttons:
 
 # counter
 counter:
-  - name: "Clientes"
-    number: 25
+  - name: "Años de experiencia"
+    number: 12
     measurement: M
     color: "#A3A1FB"
   - name: "Proyectos adjudicados"
-    number: 440
+    number: 70
     measurement: M
     color: "#5EE2A0"
-  - name: "Customers"
-    number: 50
-    measurement: K
-    color: "#FE6019"
-  - name: "Customers"
+  - name: "Clientes que confìan en nosotros"
     number: 20
     measurement: K
-    color: "#FEC163"
+    color: "#FE6019"
 
 # Gallery
 gallery:

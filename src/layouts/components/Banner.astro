@@ -1,43 +1,43 @@
 ---
+import { Image } from "astro:assets";
+import bg from "@/assets/images/gallery/1-(195).jpeg";
 const title =
   'Líderes en obras viales y urbanización en la Región de Valparaíso';
 const content =
   'Construimos con enfoque técnico, eficiencia operativa y alto estándar en cada etapa del proyecto. Atendemos requerimientos públicos y privados con soluciones confiables y sostenibles.';
 ---
 
-<section class="relative w-full h-[500px]  overflow-hidden">
-  <!-- Fondo con parallax -->
+<section class="relative w-full h-[600px] overflow-hidden text-white">
+  <!-- Capa de fondo con parallax -->
   <div
-    class="absolute inset-0 bg-banner bg-cover bg-no-repeat bg-fixed bg-left-top"
-  ></div>
+    class="absolute inset-0 -z-10 bg-banner bg-no-repeat bg-cover bg-left-top bg-fixed sm:bg-scroll"
+    style="background-position: 25% 30%;">
+  </div>
 
-  <!-- Capa oscura con blur -->
-  <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-10"></div>
+  <!-- Capa de oscurecimiento -->
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-0"></div>
 
-  <!-- Contenido -->
-  <div class="relative z-20 container h-full flex items-center">
-    <div class="max-w-2xl">
-      <h1 class="text-4xl font-bold text-white" set:html={title} />
-      <p class="mt-6 text-lg text-white" set:html={content} />
+  <!-- Contenido principal -->
+  <div class="relative z-10 container h-full flex items-center">
+    <div class="max-w-2xl rounded-lg p-8 bg-black/50 backdrop-blur-md">
+      <h1 class="text-4xl font-bold text-white">{title}</h1>
+      <p class="mt-4 text-lg text-white">{content}</p>
     </div>
   </div>
 </section>
 
 <style>
   .bg-banner {
-    background-image: url('/src/assets/images/gallery/1-(195).jpeg');
-    background-position: 25% 30%; /* Primer tercio (tractor a la izquierda y arriba) */
-  }
+  background-image: url('/images/banner-escavadora.webp');
+  background-position: 25% 30%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
-  @media (min-width: 768px) {
-    .bg-banner {
-      background-position: 20% 25%;
-    }
+@media (max-width: 768px) {
+  .bg-banner {
+    background-attachment: scroll;
   }
-
-  @media (min-width: 1024px) {
-    .bg-banner {
-      background-position: 18% 22%;
-    }
-  }
+}
 </style>

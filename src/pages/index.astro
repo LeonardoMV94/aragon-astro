@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 
 import ListadoServicios from '@/components/features/ListadoServicios.astro';
 import Base from '@/layouts/Base.astro';
@@ -12,12 +11,18 @@ import servicios from '@/config/servicios.json';
 import Carrousel from '@/components/Carrousel.astro';
 import clientes from '@/config/clientes.json';
 import proveedores from '@/config/proveedores.json'
+import CounterComponent from '@/components/about/CounterAragon.astro';
 
 const homepage = (await getEntry(
   'homepage',
   '-index'
 )) as CollectionEntry<'homepage'>;
-const { banner } = homepage.data;
+const { banner,  } = homepage.data;
+
+const about = (await getEntry(
+  'about',
+  '-index'
+)) as CollectionEntry<'about'>;
 
 const how_it_works = (await getEntry(
   'how-it-works',
@@ -31,13 +36,14 @@ const { our_works } = how_it_works.data;
     <Banner />
     <!-- <KeyFeatures key_features={key_features} /> -->
     <!-- <Service service={service} /> -->
+     <CounterComponent counter={about.data.counter} />
 
     <div class="container">
       {
         our_works.map((item, index) => (
           <div class="gx-5 row mt-16 items-center first:mt-12">
             <div
-              class={`lg:col-7 ${
+              class={`lg:col-6 ${
                 index % 2 === 0 ? 'lg:order-1' : 'lg:order-0'
               }`}
             >
@@ -54,7 +60,7 @@ const { our_works } = how_it_works.data;
               </div>
             </div>
             <div
-              class={`mt-6 lg:col-5 lg:mt-0 ${
+              class={`mt-6 lg:col-6 lg:mt-0 ${
                 index % 2 === 0 ? 'lg:order-0' : 'lg:order-1'
               }`}
             >
