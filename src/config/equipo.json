@@ -1,37 +1,65 @@
 [
   {
-    "nombre": "Aldo Aragón",
+    "nombre": "Aldo Aragón J.",
     "rol": "Gerente General",
     "titulo": "MBA - Ingeniero Constructor"
   },
   {
-    "nombre": "Christopher Gortaire",
+    "nombre": "Christopher Gortaire G.",
     "rol": "Gerente Técnico",
     "titulo": "Ingeniero Constructor"
   },
   {
-    "nombre": "Fernanda Cepeda",
+    "nombre": "Fernanda Cepeda B.",
     "rol": "Gerente Administración y Finanzas",
     "titulo": "Ingeniero Civil Industrial"
   },
   {
-    "nombre": "Caterin Latorre",
+    "nombre": "Caterin Latorre V.",
     "rol": "Jefe Administración y Control",
     "titulo": "Ingeniero en Administración"
   },
   {
-    "nombre": "Pamela Sacre",
-    "rol": "Administrador de Obra",
-    "titulo": "Ingeniero Constructor"
+    "nombre": "Rodrigo Aragón J.",
+    "rol": "Gerencia Activos y Maquinaria ",
+    "titulo": "Ing. Civil Industrial"
   },
   {
-    "nombre": "Cristian Jara",
-    "rol": "Administrador de Obra",
-    "titulo": "Ingeniero Constructor"
+    "nombre": "Claudia Mallea O.",
+    "rol": "Previsionista de Riesgos",
+    "titulo": " Ing. en Prevención de Riesgos"
   },
   {
-    "nombre": "Manuel Bustos",
-    "rol": "Autocontrol",
-    "titulo": "Ingeniero Constructor"
+    "nombre": "Paola Farfán H.",
+    "rol": "",
+    "titulo": "Contador Auditor"
+  },
+  {
+    "nombre": "Pamela Sacre G.",
+    "rol": "",
+    "titulo": "Ing. en Construcción"
+  },
+  {
+    "nombre": "Cristian Jara I.",
+    "rol": "",
+    "titulo": "Ing. en Construcción"
+  },
+  {
+    "nombre": "Manuel Bustos J.",
+    "rol": "",
+    "titulo": "Ing. en Construcción"
+  },
+  {
+    "nombre": "Camila Soto R.",
+    "rol": "",
+    "titulo": "Ing. en Construcción"
+  },
+  {
+    "nombre": "Flavio Bustos P.",
+    "rol": "",
+    "titulo": "Ing. en Construcción"
   }
+
+
+
 ]
