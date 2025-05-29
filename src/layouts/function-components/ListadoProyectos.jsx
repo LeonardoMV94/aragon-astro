@@ -18,7 +18,7 @@ const ListadoProyectos = ({ projects, categories }) => {
   const [tab, setTab] = useState("");
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Number of projects to display per page
+  const itemsPerPage = 5; // Number of projects to display per page
 
   // filterPost will contain projects where the 'categories' array includes the selected tab
   const filterPost = !tab
