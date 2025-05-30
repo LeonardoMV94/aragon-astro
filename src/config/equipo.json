@@ -2,76 +2,91 @@
   {
     "nombre": "Aldo Aragón J.",
     "rol": "Gerente General",
-    "titulo": "MBA - Ingeniero Constructor"
+    "titulo": "MBA - Ingeniero Constructor",
+    "imagen": "aldo.jpg"
   },
   {
     "nombre": "Christopher Gortaire G.",
     "rol": "Gerente Técnico",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "nn.webp"
   },
   {
     "nombre": "Fernanda Cepeda B.",
     "rol": "Gerente Administración y Finanzas",
-    "titulo": "Ingeniero Civil Industrial"
+    "titulo": "Ingeniero Civil Industrial",
+    "imagen": "nn.webp"
   },
   {
     "nombre": "Caterin Latorre V.",
     "rol": "Jefe Administración y Control",
-    "titulo": "Ingeniero en Administración"
+    "titulo": "Ingeniero en Administración",
+    "imagen": "Caterin.jpg"
   },
   {
     "nombre": "Rodrigo Aragón J.",
     "rol": "Gerencia Activos y Maquinaria ",
-    "titulo": "Ing. Civil Industrial"
+    "titulo": "Ing. Civil Industrial",
+    "imagen": "nn.webp"
   },
   {
     "nombre": "Claudia Mallea O.",
     "rol": "Prevencionista de Riesgos",
-    "titulo": "Ing. en Prevención de Riesgos"
+    "titulo": "Ing. en Prevención de Riesgos",
+    "imagen": "Claudia.jpg"
   },
   {
     "nombre": "Paola Farfán H.",
     "rol": "",
-    "titulo": "Contador Auditor"
+    "titulo": "Contador Auditor",
+    "imagen": "Paola.jpg"
   },
   {
     "nombre": "Pamela Sacre G.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "Pamela.jpg"
   },
   {
     "nombre": "Cristian Jara I.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "nn.webp"
   },
   {
     "nombre": "Manuel Bustos J.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "Manuel.jpg"
   },
   {
     "nombre": "Camila Soto R.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "nn.webp"
   },
   {
     "nombre": "Susan Vega A.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "Susan.jpg"
   },
   {
     "nombre": "Flavio Bustos P.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "Flavio.jpg"
   },
   {
     "nombre": "Freya Gonzalez M.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "Freya.jpg"
   },
   {
     "nombre": "Esteban Vega T.",
     "rol": "",
-    "titulo": "Ingeniero Constructor"
+    "titulo": "Ingeniero Constructor",
+    "imagen": "nn.webp"
   }
 ]
