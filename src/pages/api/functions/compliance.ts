@@ -92,7 +92,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
                 contact_name, contact_email, contact_phone, confidentiality_consent,
                 submission_timestamp
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-  
+
     if (tursoClient) {
       try {
         await tursoClient.execute({
@@ -176,7 +176,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       JSON.stringify({
         status: "success",
         message:
-          "¡Tu reporte ha sido enviado con éxito y registrado! Agradecemos tu valiosa colaboración. Nos pondremos en contacto si proporcionaste tus datos.",
+          "¡Tu reporte ha sido enviado con éxito y registrado! Agradecemos tu valiosa colaboración. Pronto enviaremos la confirmación de recepción a su correo o medio de contacto.",
       }),
       {
         status: 200, // OK

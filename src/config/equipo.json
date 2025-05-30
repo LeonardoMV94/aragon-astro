@@ -26,8 +26,8 @@
   },
   {
     "nombre": "Claudia Mallea O.",
-    "rol": "Previsionista de Riesgos",
-    "titulo": " Ing. en Prevención de Riesgos"
+    "rol": "Prevencionista de Riesgos",
+    "titulo": "Ing. en Prevención de Riesgos"
   },
   {
     "nombre": "Paola Farfán H.",
@@ -37,44 +37,41 @@
   {
     "nombre": "Pamela Sacre G.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Cristian Jara I.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Manuel Bustos J.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Camila Soto R.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Susan Vega A.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Flavio Bustos P.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Freya Gonzalez M.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   },
   {
     "nombre": "Esteban Vega T.",
     "rol": "",
-    "titulo": "Ing. en Construcción"
+    "titulo": "Ing. Constructor"
   }
-
-
-
 ]

@@ -57,7 +57,8 @@ const ComplianceForm = () => {
       if (response.ok) {
         setFormMessage({
           type: "success",
-          text: "¡Formulario enviado con éxito!",
+          text:  `¡Formulario enviado con éxito!
+          Pronto enviaremos la confirmación de recepción a su correo o medio de contacto.`,
         });
         reset();
         setFilePreviews([]);
@@ -407,7 +408,7 @@ const ComplianceForm = () => {
         </div>
 
         <div className="form-group mb-5">
-          <label className="form-label block mb-1">Confidencialidad</label>
+          <label className="form-label block mb-1">Anonimato</label>
           <div className="flex gap-6">
             <label>
               <input
