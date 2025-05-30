@@ -115,10 +115,10 @@ export const POST: APIRoute = async ({ request }) => {
     if (tursoClient) {
       // TypeScript ahora sabe que tursoClient es de tipo Client aquí
       try {
-        // await tursoClient.execute({
-        //   sql: "INSERT INTO form_contacto (name, email, subject, message) VALUES (?, ?, ?, ?)",
-        //   args: [name, email, subject, message],
-        // });
+        await tursoClient.execute({
+          sql: "INSERT INTO form_contacto (name, email, subject, message) VALUES (?, ?, ?, ?)",
+          args: [name, email, asunto, message],
+        });
         console.log("Datos de contacto guardados en Turso.");
       } catch (dbError) {
         console.error("Error al guardar en la base de datos Turso:", dbError);
