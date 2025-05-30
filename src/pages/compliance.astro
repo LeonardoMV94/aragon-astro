@@ -2,6 +2,7 @@
 
 import config from '@/config/config.json';
 import Base from '@/layouts/Base.astro';
+import FormCompliance from '@/layouts/function-components/FormCompliance.jsx'
 import CollapsibleSection from '@/layouts/components/CollapsibleSection.astro';
 import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
@@ -46,13 +47,14 @@ const datos = {
         />
       </div>
       <div class="my-10 w-full">
-        <form
+        <FormCompliance client:only="react"/>
+        <!-- <form
           class="lg:mx-4 mx-auto"
           action="/api/functions/compliance"
           method="POST"
           enctype="multipart/form-data"
         >
-          <CollapsibleSection title="Datos de la denuncia">
+          <CollapsibleSection title="DATOS DE LA DENUNCIA">
             <div class="form-group mb-5">
               <label class="form-label" for="fecha">Fecha:</label>
               <input
@@ -215,7 +217,7 @@ const datos = {
             </div>
           </CollapsibleSection>
 
-          <!-- <div class="form-group mb-5">
+           <div class="form-group mb-5">
               <label class="form-label" for="archivoRespaldo"
                 >Adjuntar información de respaldo.</label
               >
@@ -229,10 +231,10 @@ const datos = {
               <small class="block text-gray-500 mt-1"
                 >(Fotografías, documentos: .doc, .pdf y .jpg. Máximo 5 MB)</small
               >
-            </div> -->
+            </div>
 
-          <!-- <h3 class="h5 mb-4 mt-8">Datos de contacto</h3> -->
-          <CollapsibleSection title="Datos de contacto">
+          <h3 class="h5 mb-4 mt-8">Datos de contacto</h3>
+          <CollapsibleSection title="DATOS DE CONTACTO">
             <div class="form-group mb-5">
               <label class="form-label" for="name">Nombre:</label>
               <input
@@ -298,14 +300,14 @@ const datos = {
                 </label>
               </div>
             </div>
-
+          </CollapsibleSection>
             <input
-              class="btn btn-primary block w-full"
+              class="btn btn-primary block w-full mt-6"
               type="submit"
               value="Enviar"
             />
-          </CollapsibleSection>
-        </form>
+
+        </form> -->
       </div>
     </div>
   </section>

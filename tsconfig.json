@@ -7,10 +7,11 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "isolatedModules": true,
     "incremental": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "paths": {
       "@/components/*": ["./src/layouts/components/*"],
       "@/shortcodes/*": ["./src/layouts/shortcodes/*"],
@@ -19,6 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro", "src/layouts/function-components/Servicios.jsx", "tailwind.config.js"],
+  "include": [".astro/types.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro", "src/layouts/function-components/Servicios.jsx", "tailwind.config.js", "src/layouts/function-components/FormContacto.jsx"],
   "exclude": ["node_modules", "dist"]
 }

@@ -2,7 +2,7 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
 import { z } from "zod"; // Importamos Zod
-import { complianceFormSchema } from "../../../schemas/complianceSchema"; // Importar el esquema de validación
+import { complianceFormSchema } from "@/schemas/complianceSchema"; // Importar el esquema de validación
 import { createClient, type Client } from "@libsql/client"; // Importar el cliente de Turso y su tipo
 
 // --- Variables de Entorno ---
@@ -84,19 +84,19 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
     const data = validationResult.data; // Datos validados y tipados por Zod
     const submissionTimestamp = new Date().toISOString(); // --- 2. Guardar en Turso (Base de Datos) ---
-
-    if (tursoClient) {
-      try {
-        await tursoClient.execute({
-          sql: `
+    const sqlInsertQuery: string = `
             INSERT INTO compliance_reports (
                 incident_date, incident_time, incident_location, related_compliance,
                 infraction_type, involved_parties_type, involved_parties_identification,
                 infraction_details, incident_period, knowledge_method,
                 contact_name, contact_email, contact_phone, confidentiality_consent,
                 submission_timestamp
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
- `,
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  
+    if (tursoClient) {
+      try {
+        await tursoClient.execute({
+          sql: sqlInsertQuery,
           args: [
             data.fecha, // Zod garantiza que estos campos obligatorios ya existen
             data.horario,
@@ -108,9 +108,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             data.detallesInfraccion,
             data.periodoHechos,
             data.formaConocimiento,
-            data.name || null, // Usar null para campos opcionales no proporcionados o vacíos
-            data.email || null,
-            data.telefonoContacto || null,
+            data.nombreDenunciante || null, // Usar null para campos opcionales no proporcionados o vacíos
+            data.correoDenunciante || null,
+            data.telefonoDenunciante || null,
             data.confidencialidad,
             submissionTimestamp,
           ],
@@ -140,32 +140,32 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
           to: TARGET_EMAIL,
           subject: `Nuevo Reporte de Compliance - ${data.tipoInfraccion}`,
           html: `
-            <h1>Nuevo Reporte de Compliance</h1>
-            <p><strong>Fecha y Hora del Reporte:</strong> ${new Date().toLocaleString("es-CL")}</p>
-            <h2>Datos de la denuncia:</h2>
-            <p><strong>Fecha del Incidente:</strong> ${data.fecha}</p>
-            <p><strong>Horario del Incidente:</strong> ${data.horario}</p>
-            <p><strong>Lugar del Incidente:</strong> ${data.lugarIncidente}</p>
-            <p><strong>Incumplimiento Asociado:</strong> ${data.incumplimientoAsociado}</p>
-            <p><strong>Tipo de Infracción:</strong> ${data.tipoInfraccion}</p>
-            <p><strong>Colaboradores Involucrados:</strong> ${data.colaboradoresInvolucrados}</p>
-            <p><strong>Identificación Involucrados:</strong> ${data.identificacionInvolucrados}</p>
-            <p><strong>Detalles de la Infracción:</strong><br>${data.detallesInfraccion.replace(/\n/g, "<br>")}</p>
-            <p><strong>Periodo de los Hechos:</strong> ${data.periodoHechos}</p>
-            <p><strong>Forma de Conocimiento:</strong> ${data.formaConocimiento}</p>
+            <h1>Nuevo Reporte de Compliance</h1>
+            <p><strong>Fecha y Hora del Reporte:</strong> ${new Date().toLocaleString("es-CL")}</p>
+            <h2>Datos de la denuncia:</h2>
+            <p><strong>Fecha del Incidente:</strong> ${data.fecha}</p>
+            <p><strong>Horario del Incidente:</strong> ${data.horario}</p>
+            <p><strong>Lugar del Incidente:</strong> ${data.lugarIncidente}</p>
+            <p><strong>Incumplimiento Asociado:</strong> ${data.incumplimientoAsociado}</p>
+            <p><strong>Tipo de Infracción:</strong> ${data.tipoInfraccion}</p>
+            <p><strong>Colaboradores Involucrados:</strong> ${data.colaboradoresInvolucrados}</p>
+            <p><strong>Identificación Involucrados:</strong> ${data.identificacionInvolucrados}</p>
+            <p><strong>Detalles de la Infracción:</strong><br>${data.detallesInfraccion.replace(/\n/g, "<br>")}</p>
+            <p><strong>Periodo de los Hechos:</strong> ${data.periodoHechos}</p>
+            <p><strong>Forma de Conocimiento:</strong> ${data.formaConocimiento}</p>
 
-            <h2>Datos de Contacto (si proporcionados):</h2>
-            <p><strong>Nombre:</strong> ${data.name || "Anónimo"}</p>
-            <p><strong>Correo Electrónico:</strong> ${data.email || "No especificado"}</p>
-            <p><strong>Teléfono:</strong> ${data.telefonoContacto || "No especificado"}</p>
-            <p><strong>Autoriza Confidencialidad:</strong> ${data.confidencialidad === "si" ? "Sí" : "No"}</p>
+            <h2>Datos de Contacto (si proporcionados):</h2>
+            <p><strong>Nombre:</strong> ${data.nombreDenunciante || "Anónimo"}</p>
+            <p><strong>Correo Electrónico:</strong> ${data.correoDenunciante || "No especificado"}</p>
+            <p><strong>Teléfono:</strong> ${data.telefonoDenunciante || "No especificado"}</p>
+            <p><strong>Autoriza Confidencialidad:</strong> ${data.confidencialidad === "si" ? "Sí" : "No"}</p>
 
-            <hr>
-            <small>Este correo fue generado automáticamente por el canal de denuncias. IP del remitente: ${clientAddress || "N/A"}</small>
-          `,
+            <hr>
+            <small>Este correo fue generado automáticamente por el canal de denuncias. IP del remitente: ${clientAddress || "N/A"}</small>
+          `,
         });
         console.log(
-          `Correo de denuncia enviado con éxito para ${data.name || "Anónimo"}.`,
+          `Correo de denuncia enviado con éxito para ${data.nombreDenunciante || "Anónimo"}.`,
         );
       } catch (emailError) {
         console.error("Error al enviar el correo con Resend:", emailError); // El dato ya está en la DB, así que este error no es crítico para la respuesta del usuario.

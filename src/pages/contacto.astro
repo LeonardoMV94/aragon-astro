@@ -1,30 +1,15 @@
 ---
 
-import config from '@/config/config.json';
 import Base from '@/layouts/Base.astro';
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import { getEntry } from 'astro:content';
-
-const entry = (await getEntry(
-  'contact',
-  '-index'
-)) as CollectionEntry<'contact'>;
-const { contact_form_action } = config.params;
-const contact = entry.data;
-const page_data = {
-  ...contact,
-  content: entry.body
-};
+import FormContacto from '@/layouts/function-components/FormContacto.jsx'
 
 const description = `Tienes dudas, comentarios o sugerencias? ¡Nos encantaría saber de ti! Por favor, completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.`;
 ---
 
 <Base
   title="Contacto | Constructora Aragón Ltda."
-  meta_title={contact.meta_title}
-  description={contact.description}
-  image={contact.image}
+  meta_title="Formulario de contacto | Constructora Aragón Ltda."
+  description="Formulario de contacto"
 >
   <section class="page-hero pb-6 pt-16">
     <div class="container col-11 md:col-8 lg:col-6 mx-auto">
@@ -39,9 +24,10 @@ const description = `Tienes dudas, comentarios o sugerencias? ¡Nos encantaría 
     <div class="container col-11 md:col-8 lg:col-6 mx-auto">
       <div class="row justify-center">
         <div class="py-10 col-11 md:col-10 lg:col-10">
-          <form
+          <FormContacto client:only="react"/>
+          <!-- <form
             class="lg:mx-4 mx-auto"
-            action={contact_form_action}
+            action=""
             method="POST"
             name="contact"
             netlify-honeypot="bot-field"
@@ -84,7 +70,7 @@ const description = `Tienes dudas, comentarios o sugerencias? ¡Nos encantaría 
               type="submit"
               value="Enviar Mensaje"
             />
-          </form>
+          </form> -->
         </div>
       </div>
     </div>
