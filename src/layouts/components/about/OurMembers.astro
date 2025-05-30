@@ -18,7 +18,7 @@ import defaultPlaceholder from '@/assets/images/equipo/nn.webp'; // ruta desde p
               // Si persona.imagen existe, construye la URL relativa desde /images/equipo/
               const imageSrc = persona.imagen
                 ? `/images/equipo/${persona.imagen}`
-                : defaultPlaceholder;
+                : defaultPlaceholder.src;
 
               return (
                 <div
