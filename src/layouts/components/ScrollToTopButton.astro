@@ -1,0 +1,38 @@
+---
+// src/components/ScrollToTopButton.astro
+// Este componente encapsula la lógica y el UI del botón "Scroll to Top"
+// y está configurado para ser fijo en la esquina inferior derecha con un estilo predefinido.
+---
+
+<button
+  id="scrollToTopBtn"
+  class="fixed bottom-4 right-4 bg-[#f19404] hover:bg-[#e96d00] text-white p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 hidden"
+  aria-label="Subir al inicio"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script is:inline>
+  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+  // Mostrar/ocultar el botón basado en el scroll
+  // Se oculta inicialmente con la clase 'hidden' y se muestra con JS
+  window.onscroll = function() {
+    // Si el scroll vertical es mayor a 200px (o cualquier valor que prefieras)
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollToTopBtn.classList.remove('hidden'); // Muestra el botón
+    } else {
+      scrollToTopBtn.classList.add('hidden'); // Oculta el botón
+    }
+  };
+
+  // Scroll suave al hacer clic
+  scrollToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
