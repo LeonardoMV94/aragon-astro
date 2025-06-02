@@ -1,10 +1,9 @@
 ---
-export const prerender = false; // SSR
+export const prerender = true; // SSR
 
 import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
 import Base from '@/layouts/Base.astro';
-import Shape from '@/components/Shape.astro';
 import OurMembers from '@/components/about/OurMembers.astro';
 import ListadoProyectos from '@/layouts/function-components/ListadoProyectos.jsx';
 import ApexChart from '@/layouts/function-components/Chart.jsx';
@@ -66,7 +65,7 @@ const pageHeaderData = {
       <!-- <CounterComponent counter={counter} /> -->
       <ApexChart client:only="react" />
       <ListadoProyectos
-        client:only="react"
+        client:load
         categories={uniqueCategories}
         projects={processedProjects}
       />

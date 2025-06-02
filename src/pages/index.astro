@@ -1,5 +1,4 @@
 ---
-
 import ListadoServicios from '@/components/features/ListadoServicios.astro';
 import Base from '@/layouts/Base.astro';
 import Banner from '@/layouts/components/Banner.astro';
@@ -10,19 +9,10 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import servicios from '@/config/servicios.json';
 import Carrousel from '@/components/Carrousel.astro';
 import clientes from '@/config/clientes.json';
-import proveedores from '@/config/proveedores.json'
+import proveedores from '@/config/proveedores.json';
 import CounterComponent from '@/components/about/CounterAragon.astro';
 
-const homepage = (await getEntry(
-  'homepage',
-  '-index'
-)) as CollectionEntry<'homepage'>;
-const { banner,  } = homepage.data;
-
-const about = (await getEntry(
-  'about',
-  '-index'
-)) as CollectionEntry<'about'>;
+const about = (await getEntry('about', '-index')) as CollectionEntry<'about'>;
 
 const how_it_works = (await getEntry(
   'how-it-works',
@@ -34,9 +24,7 @@ const { our_works } = how_it_works.data;
 <Base>
   <article class="page-hero py-2">
     <Banner />
-    <!-- <KeyFeatures key_features={key_features} /> -->
-    <!-- <Service service={service} /> -->
-     <CounterComponent counter={about.data.counter} />
+    <CounterComponent counter={about.data.counter} />
 
     <div class="container">
       {
@@ -83,18 +71,31 @@ const { our_works } = how_it_works.data;
         ))
       }
     </div>
-    <Carrousel items={proveedores} heading='Algunos de nuestros proveedores' folderAssets="proveedores" />
+    <Carrousel
+      items={proveedores}
+      heading="Algunos de nuestros proveedores"
+      folderAssets="proveedores"
+    />
     <ListadoServicios servicios={servicios} />
-    <!-- <Testimonial testimonial={testimonial} /> -->
 
-    <!-- TODO: aqui carrousel de proveedores -->
-    <Carrousel items={clientes} heading='Algunos de nuestros clientes' folderAssets="clientes" />
+    <!--  aqui carrousel de proveedores -->
+    <Carrousel
+      items={clientes}
+      heading="Algunos de nuestros clientes"
+      folderAssets="clientes"
+    />
 
     <!-- contacto -->
 
-    <section class="section pt-0 delay-[400ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0" data-taos-offset="500">
+    <section
+      class="section pt-0 delay-[400ms] duration-[600ms] taos:translate-x-[200px] taos:opacity-0"
+      data-taos-offset="500"
+    >
       <div class="container">
-        <h2 class="mb-5 text-4xl mt-8 text-center pt-16 pb-8 " set:html="Contáctenos" />
+        <h2
+          class="mb-5 text-4xl mt-8 text-center pt-16 pb-8"
+          set:html="Contáctenos"
+        />
       </div>
       <div class="container">
         <div class="row">
@@ -198,20 +199,4 @@ const { our_works } = how_it_works.data;
     width: 100%;
     position: absolute;
   }
-
-  /* --- OR use the modern aspect-ratio property instead --- */
-  /*
-  .responsive-map-container {
-    aspect-ratio: 16 / 9; // Define 16:9 ratio
-    width: 100%; // Take full width
-    max-width: 500px; // Optional: keep original max width
-    margin-left: auto;
-    margin-right: auto; // Optional: center it
-  }
-
-  .responsive-map-container iframe {
-    width: 100%;
-    height: 100%;
-  }
-  */
 </style>

@@ -1,6 +1,12 @@
+import { useState,useEffect } from "react";
 import Chart from "react-apexcharts";
+import ChartFallback from "./ChartFallback";
+
 
 const ApexChart = () => {
+  const [isBrowser, setIsBrowser] = useState(false);
+
+
   const options = {
     chart: {
       id: "line",
@@ -67,6 +73,12 @@ const ApexChart = () => {
     },
   ];
 
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  if (!isBrowser) return <ChartFallback />;
+
   return (
     <section className="section">
       <div className="container">
@@ -75,7 +87,8 @@ const ApexChart = () => {
             <h2>Montos que nos han adjudicado </h2>
             {/* El padding de Tailwind aquí es para el contenedor externo,
                 útil para el layout general, pero no para el corte interno del gráfico */}
-            <div className="card mt-6 shadow-lg">
+            <div className=" md:px-4 md:py-2 rounded-xl shadow-xl">
+
               <Chart
                 options={options}
                 series={series}

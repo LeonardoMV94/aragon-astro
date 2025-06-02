@@ -1,0 +1,905 @@
+---
+export const prerender = true;
+import config from '@/config/config.json';
+import Base from '@/layouts/Base.astro';
+import CollapsibleSection from '@/layouts/components/CollapsibleSection.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+
+const entry = (await getEntry(
+  'contact',
+  '-index'
+)) as CollectionEntry<'contact'>;
+const { contact_form_action } = config.params;
+const contact = entry.data;
+const page_data = {
+  ...contact,
+  content: entry.body
+};
+
+const datos = {
+  title: 'Ley Karin ',
+  description: `
+    <p class="mb-4">Bienvenido al canal de reportes de Constructora Aragón Ltda.</p>
+    <p class="mb-4"> El canal es un medio seguro para comunicar a los encargados de cumplimiento, la información o sospechas que tengas sobre infracciones de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=1008668" class="underline decoration-2 decoration-[#f09300]" target="_blank">Ley N°20.393</a> sobre responsabilidad Penal de las Personas Jurídicas (sanciona el delito de cohecho, lavado de dinero, entre otros) o a la normativa interna de la Compañía (Ej.: Código de Ética). De igual forma, podrás realizar las consultas o inquietudes que tengas acerca del sistema de integridad que hemos implementado. Constructora Aragón Ltda. con el objetivo de garantizar la confidencialidad de las comunicaciones o denuncias, cuenta con una plataforma exclusiva que permite su tratamiento por un medio seguro por parte de los encargados de revisar la información y de realizar las eventuales investigaciones o resolver las inquietudes.</p>
+    <p>En caso de que decidas agregar tu nombre en la denuncia, se mantendrá la confidencialidad de tu identidad, pudiendo tratarse los datos sólo por aquellos responsables del proceso de investigación y de sancionar los incumplimientos. En este caso, el denunciante consiente expresamente en el tratamiento de sus datos personales con la sola finalidad de analizar la información denunciada y llevar a cabo las investigaciones que resulten necesarias, en cumplimiento de la <a href="https://www.bcn.cl/leychile/navegar?idNorma=141599" class="underline decoration-2 decoration-[#f09300]" target="_blank">Ley N°19.628</a> sobre protección de datos personales. Conforme a la Política de Protección del Denunciante, en ningún caso se permitirán retaliaciones o represalias en contra de quién ha realizado una denuncia de buena fe y se adoptarán todas las medidas que sean necesarias para que se cumpla esta garantía.</p>
+  `
+};
+---
+
+<Base
+  title="Ley Karin | Constructora Aragón Ltda."
+  meta_title="Ley Karin | Constructora Aragón Ltda."
+  description="Canal de denuncias Ley Karin"
+>
+  <section class="page-hero pb-6 pt-16">
+    <div class="container col-11 md:col-8 lg:col-6 mx-auto">
+      <h1 class="mb-5 mt-8 text-center" set:html="Ley Karin" />
+      <!-- <div class="text-base text-gray-900" set:html={datos.description} /> -->
+    </div>
+  </section>
+
+  <section class="section pt-0">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="card py-10 col-11 md:col-10 lg:col-10">
+          <form
+            id="uploadForm"
+            action="/api/functions/leykarin"
+            method="POST"
+            enctype="multipart/form-data"
+            class="lg:mx-4 mx-auto"
+            novalidate
+          >
+            <input type="hidden" name="formulario_enviado" value="1" />
+
+            <CollapsibleSection title="DATOS DEL DENUNCIANTE">
+              <div class="alert hidden" aria-live="assertive">
+                <p class="text-red-500 mt-1 font-semibold mb-0">
+                  (*) FALTAN CAMPOS REQUERIDOS.
+                </p>
+              </div>
+
+              <div class="grid md:grid-cols-2 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-2">
+                    Toda la información entregada en este formulario será tratada
+                    y administrada en extrema confidencialidad, tanto sus datos
+                    como los de terceros, sólo serán utilizados para efectos de
+                    comunicación con usted, las partes involucradas y el proceso
+                    de investigación que corresponda.
+                  </p>
+                  <p class="mb-4">
+                    <strong class="text-red-500">(*) Campos Obligatorios</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="asunto_titulo_denunciante"
+                      >Asunto (*) | Máximo 85 caracteres.</label
+                    >
+                    <input
+                      type="text"
+                      name="asunto_denunciante"
+                      id="asunto_titulo_denunciante"
+                      placeholder="Ejemplo: Denuncia sobre abuso sexual en area de recursos humanos"
+                      maxlength="85"
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido.
+                    </span>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="nombre_datos_denunciante"
+                      >Nombres y Apellidos (*) | Máximo 50 caracteres.</label
+                    >
+                    <input
+                      type="text"
+                      name="nombres_apellidos_denunciante"
+                      id="nombre_datos_denunciante"
+                      placeholder=""
+                      maxlength="85"
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido.
+                    </span>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="rut_datos_denunciante"
+                      >Rut (*) | Con guión y digito verificador, Máximo 12
+                      caracteres.</label
+                    >
+                    <input
+                      type="text"
+                      name="rut_denunciante"
+                      id="rut_datos_denunciante"
+                      placeholder="16618865-2"
+                      maxlength="12"
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido.
+                    </span>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="cargo_datos_denunciante"
+                      >Cargo (*) | Máximo 50 caracteres.</label
+                    >
+                    <input
+                      type="text"
+                      name="cargo_denunciante"
+                      id="cargo_datos_denunciante"
+                      placeholder=""
+                      maxlength="50"
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido.
+                    </span>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="area_trabajo_datos_denunciante"
+                      >Gerencia, departamento o área donde trabaja (*) | Máximo 60
+                      caracteres.</label
+                    >
+                    <input
+                      type="text"
+                      name="area_denunciante"
+                      id="area_trabajo_datos_denunciante"
+                      placeholder="Ejemplo, Área de Recursos Humanos"
+                      maxlength="60"
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido.
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="email_datos_denunciante"
+                      >Email (*)</label
+                    >
+                    <input
+                      type="email"
+                      name="email_denunciante"
+                      id="email_datos_denunciante"
+                      placeholder=""
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido con un email
+                      válido.
+                    </span>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="telefono_datos_denunciante"
+                      >Teléfono de Contacto (*) | Máximo 15 caracteres.</label
+                    >
+                    <input
+                      type="text"
+                      name="telefono_contacto_denunciante"
+                      id="telefono_datos_denunciante"
+                      placeholder=""
+                      maxlength="15"
+                      required
+                      class="form-control"
+                    />
+                    <span class="form-error hidden" role="alert">
+                      Por favor, complete este campo requerido.
+                    </span>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <fieldset class="mb-2">
+                      <legend class="form-label"
+                        >Quien realiza la denuncia, ¿es la presunta víctima de lo
+                        denunciado? (*)</legend
+                      >
+                      <div class="flex items-center space-x-4">
+                        <label class="inline-flex items-center">
+                          <input
+                            type="radio"
+                            name="quien_realiza_denuncia"
+                            value="Si"
+                            id="presunta_victima_denunciado_si"
+                            required
+                            class="form-radio"
+                          />
+                          <span class="ml-2">Sí</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                          <input
+                            type="radio"
+                            name="quien_realiza_denuncia"
+                            value="No"
+                            id="presunta_victima_denunciado_no"
+                            class="form-radio"
+                          />
+                          <span class="ml-2">No</span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="opcion_empresa_seleccionada_id"
+                      >Seleccione su empresa a la que pertenece</label
+                    >
+                    <select
+                      id="opcion_empresa_seleccionada_id"
+                      name="opcion_empresa_seleccionada"
+                      class="form-select"
+                    >
+                      <option value="" disabled selected>
+                        Seleccione su empresa
+                      </option>
+                      <option value="paginaswebpro">paginaswebpro</option>
+                      <option value="ilia-capacitacion"
+                        >ilia-capacitacion</option
+                      >
+                      <option value="virtualworld">virtualworld</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label
+                      class="form-label"
+                      for="confirmacion_empresa_seleccionada_id"
+                      >Confirme su empresa a la que pertenece</label
+                    >
+                    <select
+                      id="confirmacion_empresa_seleccionada_id"
+                      name="confirmacion_empresa_seleccionada"
+                      class="form-select"
+                    >
+                      <option value="" disabled selected>
+                        Seleccione su empresa
+                      </option>
+                      <option value="paginaswebpro">paginaswebpro</option>
+                      <option value="ilia-capacitacion"
+                        >ilia-capacitacion</option
+                      >
+                      <option value="virtualworld">virtualworld</option>
+                    </select>
+                    <div id="resultado" class="text-sm mt-2 font-medium"></div>
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="DATOS DEL REPRESENTANTE">
+              <div class="grid md:grid-cols-2 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-4">
+                    <strong
+                      >Sólo en el caso de estar representando a la presunta
+                      víctima de la denuncia</strong
+                    >, debe ingresar a continuación, su información personal.
+                  </p>
+                </div>
+
+                <div>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="nombreyApellidosRepresentante"
+                      >Nombres y Apellidos | Máximo 85 caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="nombres_apellidos_representante"
+                      id="nombreyApellidosRepresentante"
+                      maxlength="85"
+                      placeholder=""
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="rutRepresentante"
+                      >Rut del Representante | Máximo 12 Caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="rut_representante"
+                      id="rutRepresentante"
+                      maxlength="12"
+                      placeholder="Ejemplo: 12987123-3"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="cargoRepresentante"
+                      >Cargo | Máximo 50 Caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="cargo_representante"
+                      id="cargoRepresentante"
+                      maxlength="50"
+                      placeholder=""
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="areaRepresentante"
+                      >Gerencia, departamento o área donde trabaja | Máximo 60
+                      Caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="area_representante"
+                      id="areaRepresentante"
+                      maxlength="60"
+                      placeholder="Ejemplo, Área de Recursos Humanos"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="emailRepresentante"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      name="email_representante"
+                      id="emailRepresentante"
+                      placeholder=""
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="telefonoRepresentante"
+                      >Teléfono de Contacto | Máximo 12 Caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="telefono_contacto_representante"
+                      id="telefonoRepresentante"
+                      maxlength="12"
+                      placeholder=""
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="DATOS DEL DENUNCIADO (A)">
+              <div class="alert hidden" aria-live="assertive">
+                <p class="text-red-500 mt-1 font-semibold mb-0">
+                  (*) FALTAN CAMPOS REQUERIDOS.
+                </p>
+              </div>
+              <div class="grid md:grid-cols-2 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-2">
+                    <strong
+                      >Sólo en el caso de estar representando a la presunta
+                      víctima de la denuncia</strong
+                    >, debe ingresar a continuación, su información personal.
+                  </p>
+                  <p class="mb-4">
+                    <strong class="text-red-500">(*) Campos Obligatorios</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="nombreApellidosDenunciado"
+                      >Nombres y Apellidos (*) | Máximo 85 caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="nombres_apellidos_denunciado"
+                      id="nombreApellidosDenunciado"
+                      placeholder=""
+                      maxlength="85"
+                      required
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="rutDenunciado"
+                      >Rut | Máximo 12 Caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="rut_denunciado"
+                      id="rutDenunciado"
+                      maxlength="12"
+                      placeholder=""
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="cargoDenunciado"
+                      >Cargo | Máximo 50 caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="cargo_denunciado"
+                      id="cargoDenunciado"
+                      maxlength="50"
+                      placeholder=""
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="areaDenunciado"
+                      >Gerencia, departamento o área donde trabaja | Máximo 60
+                      caracteres</label
+                    >
+                    <input
+                      type="text"
+                      name="area_denunciado"
+                      id="areaDenunciado"
+                      placeholder="Ejemplo, Área de Recursos Humanos"
+                      maxlength="60"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="ANTECEDENTES ESPECÍFICOS DE LA DENUNCIA">
+              <div class="alert hidden" aria-live="assertive">
+                <p class="text-red-500 mt-1 font-semibold mb-0">
+                  (*) FALTAN CAMPOS REQUERIDOS.
+                </p>
+              </div>
+              <div class="grid grid-cols-1 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-2">
+                    En esta sección se le consultará específicamente sobre el
+                    caso que desea denunciar y el detalle de la (s) situaciones
+                    que desea dar a conocer.
+                  </p>
+                  <p class="mb-4">
+                    <strong class="text-red-500">(*) Campos Obligatorios</strong>
+                  </p>
+                </div>
+
+                <div class="col-span-full form-group mb-5">
+                  <fieldset class="mb-4">
+                    <legend class="form-label"
+                      >¿Qué situaciones se denuncian? (*)</legend
+                    >
+                    <div class="flex flex-wrap gap-x-4">
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          type="radio"
+                          name="denuncia_antecedentes"
+                          value="acoso_laboral"
+                          id="denuncia_acoso_laboral"
+                          class="form-radio"
+                        />
+                        <span class="ml-2">Acoso Laboral</span>
+                      </label>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          type="radio"
+                          name="denuncia_antecedentes"
+                          value="acoso_sexual"
+                          id="denuncia_acoso_sexual"
+                          class="form-radio"
+                        />
+                        <span class="ml-2">Acoso Sexual</span>
+                      </label>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          type="radio"
+                          name="denuncia_antecedentes"
+                          value="maltrato_laboral"
+                          id="denuncia_maltrato_laboral"
+                          class="form-radio"
+                        />
+                        <span class="ml-2">Maltrato Laboral</span>
+                      </label>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          type="radio"
+                          name="denuncia_antecedentes"
+                          value="otra_situacion_violencia_laboral"
+                          id="denuncia_otra_situacion_violencia_laboral"
+                          class="form-radio"
+                        />
+                        <span class="ml-2"
+                          >Otra Situación de Violencia Laboral</span
+                        >
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="mb-4">
+                    <legend class="form-label"
+                      >Sobre la relación entre la víctima y el denunciado (marque
+                      las que correspondan)</legend
+                    >
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox1"
+                          type="checkbox"
+                          name="relacion_victima_denunciado_antecedentes"
+                          value="Opcion 1"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >Existe una relación asimétrica en que la víctima tiene
+                          dependencia directa o indirecta de el/la denunciado(a)</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox2"
+                          type="checkbox"
+                          name="relacion_victima_denunciado_antecedentes"
+                          value="Opcion 2"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >Existe una relación asimétrica en que el/la
+                          denunciado(a) tiene dependencia directa o indirecta de
+                          la víctima.</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox3"
+                          type="checkbox"
+                          name="relacion_victima_denunciado_antecedentes"
+                          value="Opcion 3"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >Existe una relación simétrica en que el denunciado(a)
+                          y la víctima no tiene una dependencia directa ni
+                          indirecta, pero se desempeñan en la misma área o
+                          equipo.</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox4"
+                          type="checkbox"
+                          name="relacion_victima_denunciado_antecedentes"
+                          value="Opcion 4"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >Existe una relación simétrica en que el denunciado(a)
+                          y la víctima no tiene una dependencia directa ni
+                          indirecta, y no se desempeñan en la misma área o
+                          equipo.</span
+                        >
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="mb-4">
+                    <legend class="form-label"
+                      >Sobre las presuntas situaciones denunciadas (marque las
+                      que correspondan)</legend
+                    >
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox5"
+                          type="checkbox"
+                          name="presuntas_situaciones_denunciadas_antecedentes"
+                          value="Opcion 1"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >Existe evidencia de lo denunciado (correos
+                          electrónicos, fotos, etc.)</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox6"
+                          type="checkbox"
+                          name="presuntas_situaciones_denunciadas_antecedentes"
+                          value="Opcion 2"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >Existe conocimiento de otros antecedentes de índole
+                          similar.</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox7"
+                          type="checkbox"
+                          name="presuntas_situaciones_denunciadas_antecedentes"
+                          value="Opcion 3"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2"
+                          >La situación denunciada fue informada previamente en
+                          otra instancia similar (Jefatura, supervisor, mediación
+                          laboral, etc.)</span
+                        >
+                      </label>
+                    </div>
+                    <div>
+                      <label class="inline-flex items-center mb-2">
+                        <input
+                          id="checkbox8"
+                          type="checkbox"
+                          name="presuntas_situaciones_denunciadas_antecedentes"
+                          value="Opcion 4"
+                          class="form-checkbox"
+                        />
+                        <span class="ml-2">Ninguna de las anteriores.</span>
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="EN CASO DE EXISTIR TESTIGOS">
+              <div class="grid grid-cols-1 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-2">
+                    Escriba sus nombres, correos electrónicos y/o teléfonos si
+                    los tiene disponibles. | Máximo 1000 caracteres
+                  </p>
+                  <div id="contador1" class="contador mb-2">
+                    0 / 1000 caracteres
+                  </div>
+                  <textarea
+                    id="existirTestigos"
+                    name="testigos"
+                    rows="4"
+                    cols="50"
+                    maxlength="1000"
+                    class="form-control"
+                  ></textarea>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="RELATO DE LA SITUACIÓN DENUNCIADA">
+              <div class="grid grid-cols-1 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-2">
+                    Escriba un relato de la situación que quiere denunciar,
+                    indique fechas, horas, lugares y toda la información que
+                    considere importante para conocer el caso y pueda aportar al
+                    proceso de investigación que se deberá realizar
+                  </p>
+                  <p class="mb-2 font-bold">
+                    Hoja 1: Máximo 3450 Caracteres por hoja.
+                  </p>
+                  <div id="contador2" class="contador mb-2">
+                    0 / 3450 caracteres
+                  </div>
+                  <textarea
+                    id="relatoSituacionDenunciaHoja1"
+                    name="namerelatoSituacionDenunciadaHoja1"
+                    rows="10"
+                    cols="50"
+                    maxlength="3450"
+                    class="form-control"
+                  ></textarea>
+                  <p class="mb-2 font-bold">
+                    Hoja 2 (Opcional): Máximo 3450 Caracteres por hoja.
+                  </p>
+                  <div id="contador3" class="contador mb-2">
+                    0 / 3450 caracteres
+                  </div>
+                  <textarea
+                    id="relatoSituacionDenunciaHoja2"
+                    name="namerelatoSituacionDenunciadaHoja2"
+                    rows="10"
+                    cols="50"
+                    maxlength="3450"
+                    class="form-control"
+                  ></textarea>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <CollapsibleSection title="ADJUNTAR ALGUN DOCUMENTO DE RESPALDO">
+              <div class="grid grid-cols-1 md:gap-x-6">
+                <div class="col-span-full">
+                  <p class="mb-4">
+                    <strong
+                      >Los formatos soportados son:</strong
+                    >
+                    JPG, PNG, DOCX, PPTX, PDF, MP3, MP4, ZIP | Tamaño Máximo por
+                    cada formato: 10MB
+                  </p>
+                  <div class="form-group mb-5">
+                    <label class="form-label" for="fileInput"
+                      >Suba un respaldo de la denuncia en caso de poseerlo.</label
+                    >
+                    <input
+                      type="file"
+                      id="fileInput"
+                      name="upload_file"
+                      accept=".jpg,.png,.docx,.pptx,.pdf,.mp3,.mp4,.zip"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <p class="mb-2">
+                    <strong
+                      >Si tiene un archivo más pesado que 20MB, adjunte una url
+                      o enlace,</strong
+                    >
+                    Ideal que el enlace se encuentre lo más activo posible
+                  </p>
+                  <div class="form-group mb-5">
+                    <input
+                      type="text"
+                      name="url_dadoPorUsuario_2"
+                      id="urlDadoUsuario2"
+                      placeholder="Ingrese URL o enlace del archivo"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <p class="mb-2">
+                    <strong
+                      >Segunda URL (Opcional),</strong
+                    >
+                    Ideal que el enlace se encuentre lo más activo posible
+                  </p>
+                  <div class="form-group mb-5">
+                    <input
+                      type="text"
+                      name="url_dadoPorUsuario_3"
+                      id="urlDadoUsuario3"
+                      placeholder="Ingrese URL o enlace del archivo"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </CollapsibleSection>
+
+            <div class="flex flex-col md:flex-row justify-center mt-8 gap-4">
+              <div class="w-full md:w-1/2 lg:w-1/3">
+                <button
+                  type="button"
+                  class="btn btn-secondary block w-full"
+                  onclick="generarPDF()"
+                  >Generar PDF Respaldo</button
+                >
+              </div>
+              <div class="w-full md:w-1/2 lg:w-1/3">
+                <button
+                  type="submit"
+                  class="btn btn-primary block w-full"
+                  id="envioFomularioDenuncia"
+                  >Enviar Denuncia</button
+                >
+              </div>
+            </div>
+
+            <div class="mt-8 text-center text-sm text-gray-600">
+              <p>
+                <strong>Nota: Debe completar las opciones de selección (select,
+                  radio button, checkbox)</strong>, caso contrario no generará
+                el PDF a descargar directamente en su pc o teléfono. Esto es
+                simplemente un respaldo de su formulario antes de enviarlo.
+              </p>
+              <div
+                id="progressMessage"
+                class="hidden font-bold text-xl mt-4"
+              ></div>
+            </div>
+            <div id="result"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Script para la validación de coincidencia de empresas
+  document.addEventListener('DOMContentLoaded', function () {
+    const empresaSelect = document.getElementById('opcion_empresa_seleccionada_id');
+    const confirmacionSelect = document.getElementById('confirmacion_empresa_seleccionada_id');
+    const resultadoDiv = document.getElementById('resultado');
+
+    function validarCoincidencia() {
+      const empresaSeleccionada = empresaSelect.options[empresaSelect.selectedIndex].text;
+      const confirmacionEmpresa = confirmacionSelect.options[confirmacionSelect.selectedIndex].text;
+
+      if (empresaSeleccionada && confirmacionEmpresa && empresaSeleccionada !== 'Seleccione su empresa' && confirmacionEmpresa !== 'Seleccione su empresa') {
+        if (empresaSeleccionada === confirmacionEmpresa) {
+          resultadoDiv.textContent = 'Empresa coincide';
+          resultadoDiv.classList.remove('text-red-500');
+          resultadoDiv.classList.add('text-green-600');
+        } else {
+          resultadoDiv.textContent = 'No hay coincidencia, revise nuevamente la selección';
+          resultadoDiv.classList.remove('text-green-600');
+          resultadoDiv.classList.add('text-red-500');
+        }
+      } else {
+        resultadoDiv.textContent = '';
+        resultadoDiv.classList.remove('text-green-600', 'text-red-500');
+      }
+    }
+
+    empresaSelect.addEventListener('change', validarCoincidencia);
+    confirmacionSelect.addEventListener('change', validarCoincidencia);
+  });
+
+  // Scripts para contadores de caracteres (adaptados para vanilla JS)
+  document.addEventListener('DOMContentLoaded', () => {
+    const setupCounter = (textareaId, counterId, limit) => {
+      const textarea = document.getElementById(textareaId);
+      const counter = document.getElementById(counterId);
+
+      if (textarea && counter) {
+        const updateCounter = () => {
+          const caracteres = textarea.value.length;
+          counter.textContent = `${caracteres} / ${limit} caracteres`;
+
+          if (caracteres > limit) {
+            counter.classList.add('text-red-500'); // Clase para excedido
+          } else {
+            counter.classList.remove('text-red-500');
+          }
+        };
+        textarea.addEventListener('input', updateCounter);
+        updateCounter(); // Initial call to set the count
+      }
+    };
+
+    setupCounter('existirTestigos', 'contador1', 1000);
+    setupCounter('relatoSituacionDenunciaHoja1', 'contador2', 3450);
+    setupCounter('relatoSituacionDenunciaHoja2', 'contador3', 3450);
+  });
+
+  // La función `generarPDF()` necesita ser definida si es parte de tu lógica de negocio
+  // Si no está definida, causará un error. Si es un archivo JS externo, impórtalo.
+  // Ejemplo (si es una función simple, de lo contrario, ignora este bloque):
+  // function generarPDF() {
+  //   alert('Función Generar PDF aún no implementada en Astro. Revisa la consola para más detalles.');
+  //   console.log('Generar PDF: Lógica de generación de PDF debe ser implementada.');
+  // }
+</script>
