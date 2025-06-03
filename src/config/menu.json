@@ -9,16 +9,16 @@
       "url": "/sobre-nosotros"
     },
     {
-      "name": "Contacto",
-      "url": "/contacto"
-    },
-    {
       "name": "Compliance",
       "url": "/compliance"
     },
     {
       "name": "Ley Karin",
       "url": "/ley-karin"
+    },
+    {
+      "name": "Contacto",
+      "url": "/contacto"
     },
     {
       "name": "Galería",

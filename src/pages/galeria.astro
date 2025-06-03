@@ -30,7 +30,7 @@ const images = Object.entries(rawImages).map(([path, rawModule]) => {
     // Retornar un placeholder o omitir la imagen si no es válida
     // Para este ejemplo, retornaremos un objeto básico para evitar errores
     return {
-      src: { src: '', width: 1, height: 1, format: 'png' }, // Placeholder mínimo
+      src: { src: '', width: 1, height: 1, format: 'png' } as ImageMetadata, // Placeholder mínimo
       alt: 'Error al cargar imagen'
     };
   }
@@ -43,7 +43,7 @@ const images = Object.entries(rawImages).map(([path, rawModule]) => {
   ) {
     // console.error(`¡ERROR CRÍTICO! 'module' sigue sin ser válido después de la lógica: ${path}`);
     return {
-      src: { src: '', width: 1, height: 1, format: 'png' },
+      src: { src: '', width: 1, height: 1, format: 'png' } as ImageMetadata,
       alt: 'Error al cargar imagen'
     };
   }
