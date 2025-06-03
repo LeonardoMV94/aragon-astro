@@ -1,14 +1,14 @@
 ---
-import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
-import config from "@/config/config.json";
-import theme from "@/config/theme.json";
-import { plainify } from "@/lib/utils/textConverter";
-import Footer from "@/partials/Footer.astro";
-import Header from "@/partials/Header.astro";
-import "@/styles/main.css";
-import { AstroFont } from "astro-font";
-import { ClientRouter } from "astro:transitions";
-import ScrollToTopButton from "./components/ScrollToTopButton.astro";
+import TwSizeIndicator from '@/components/TwSizeIndicator.astro';
+import config from '@/config/config.json';
+import theme from '@/config/theme.json';
+import { plainify } from '@/lib/utils/textConverter';
+import Footer from '@/partials/Footer.astro';
+import Header from '@/partials/Header.astro';
+import '@/styles/main.css';
+import { AstroFont } from 'astro-font';
+import { ClientRouter } from 'astro:transitions';
+import ScrollToTopButton from './components/ScrollToTopButton.astro';
 
 // font families
 const pf = theme.fonts.font_family.primary;
@@ -17,17 +17,18 @@ const sf = theme.fonts.font_family.secondary;
 let fontPrimary, fontSecondary;
 if (theme.fonts.font_family.primary) {
   fontPrimary = theme.fonts.font_family.primary
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
+    .replace(/\+/g, ' ')
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, '');
 }
 if (theme.fonts.font_family.secondary) {
   fontSecondary = theme.fonts.font_family.secondary
-    .replace(/\+/g, " ")
-    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
+    .replace(/\+/g, ' ')
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, '');
 }
 
 const { title, meta_title, description, image, noindex, canonical } =
   Astro.props;
+
 ---
 
 <!doctype html>
@@ -57,21 +58,21 @@ const { title, meta_title, description, image, noindex, canonical } =
         {
           src: [],
           preload: false,
-          display: "swap",
+          display: 'swap',
           name: fontPrimary!,
-          fallback: "sans-serif",
-          cssVariable: "font-primary",
-          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`,
+          fallback: 'sans-serif',
+          cssVariable: 'font-primary',
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`
         },
         {
           src: [],
           preload: false,
-          display: "swap",
+          display: 'swap',
           name: fontSecondary!,
-          fallback: "sans-serif",
-          cssVariable: "font-secondary",
-          googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`,
-        },
+          fallback: 'sans-serif',
+          cssVariable: 'font-secondary',
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`
+        }
       ]}
     />
 
@@ -123,7 +124,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
+      content={`${config.site.base_url}/${Astro.url.pathname.replace('/', '')}`}
     />
 
     <!-- twitter-title -->
@@ -158,7 +159,10 @@ const { title, meta_title, description, image, noindex, canonical } =
       }`}
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person"
+    />
     <!-- <script>document.documentElement.classList.add('js')</script> -->
   </head>
   <body>
