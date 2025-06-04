@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "astro dev --host --verbose",
+    "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",

@@ -54,22 +54,12 @@ const FormLeyKarin = () => {
     setFormMessage(null);
 
     try {
-      const formData = new FormData();
-
-      // Convertir datos a FormData
-      Object.entries(data).forEach(([key, value]) => {
-        if (value instanceof FileList) {
-          Array.from(value).forEach((file) => {
-            formData.append(key, file);
-          });
-        } else if (value !== null && value !== undefined) {
-          formData.append(key, value);
-        }
-      });
-
       const response = await fetch("/api/functions/leykarin", {
         method: "POST",
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
@@ -78,25 +68,46 @@ const FormLeyKarin = () => {
           text: "¡Denuncia enviada con éxito! Nos pondremos en contacto contigo pronto.",
         });
         reset();
+        messageRef.current?.scrollIntoView({ behavior: "smooth" });
       } else {
         const errorData = await response.json();
         setFormMessage({
           type: "error",
           text: errorData.message || "Error al enviar el formulario",
         });
+        messageRef.current?.scrollIntoView({ behavior: "smooth" });
       }
     } catch (error) {
       setFormMessage({
         type: "error",
         text: "Error de conexión. Por favor intenta nuevamente.",
       });
+      messageRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const onInvalid = () => {
+  const onInvalid = (errors) => {
+    // Función recursiva para obtener todos los errores anidados
+    const getNestedErrors = (errors, prefix = '') => {
+      return Object.entries(errors).flatMap(([key, value]) => {
+        const fieldName = prefix ? `${prefix}.${key}` : key;
+
+        if (value && typeof value === 'object' && 'message' in value) {
+          // Es un error directo
+          return [`${fieldName}: ${value.message}`];
+        } else if (value && typeof value === 'object') {
+          // Es un objeto anidado, procesar recursivamente
+          return getNestedErrors(value, fieldName);
+        }
+        return [];
+      });
+    };
+
+    const fieldErrors = getNestedErrors(errors).join('\n');
+
     setFormMessage({
       type: "error",
-      text: "Por favor corrige los errores en el formulario antes de enviar.",
+      text: `Por favor, corrija los siguientes errores:\n${fieldErrors}`
     });
   };
 
@@ -125,9 +136,15 @@ const FormLeyKarin = () => {
       const validationResult = leyKarinSchema.safeParse(formValues);
 
       if (!validationResult.success) {
+        // Mapear los errores de Zod a un formato más amigable
+        const fieldErrors = validationResult.error.errors.map(err => {
+          const field = err.path.join('.');
+          return `${field}: ${err.message}`;
+        }).join('\n');
+
         setFormMessage({
           type: 'error',
-          text: 'Por favor, complete y valide todos los campos del formulario antes de generar el PDF.'
+          text: `Por favor, corrija los siguientes errores:\n${fieldErrors}`
         });
         return;
       }

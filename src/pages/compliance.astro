@@ -1,9 +1,7 @@
 ---
 export const prerender = true;
-import config from '@/config/config.json';
 import Base from '@/layouts/Base.astro';
 import FormCompliance from '@/layouts/function-components/FormCompliance.jsx'
-import CollapsibleSection from '@/layouts/components/CollapsibleSection.astro';
 import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
 
@@ -11,12 +9,8 @@ const entry = (await getEntry(
   'contact',
   '-index'
 )) as CollectionEntry<'contact'>;
-const { contact_form_action } = config.params;
 const contact = entry.data;
-const page_data = {
-  ...contact,
-  content: entry.body
-};
+
 
 const datos = {
   title: 'Canal de denuncias',
@@ -33,9 +27,6 @@ const datos = {
   meta_title="Canal de denuncias | Constructora Aragón Ltda."
   description={contact.description}
 >
-  <!-- <section class="page-hero pb-6 pt-16">
-
-  </section> -->
 
   <section class="pt-0">
     <div class="max-w-3xl w-full mx-auto px-4">

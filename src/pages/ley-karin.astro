@@ -1,22 +1,10 @@
 ---
-export const prerender = true;
-import config from '@/config/config.json';
+// export const prerender = true;
+
 import Base from '@/layouts/Base.astro';
 import FormLeyKarin from '@/layouts/function-components/FormLeyKarin.jsx'
-import CollapsibleSection from '@/layouts/components/CollapsibleSection.astro';
-import type { CollectionEntry } from 'astro:content';
-import { getEntry } from 'astro:content';
 
-const entry = (await getEntry(
-  'contact',
-  '-index'
-)) as CollectionEntry<'contact'>;
-const { contact_form_action } = config.params;
-const contact = entry.data;
-const page_data = {
-  ...contact,
-  content: entry.body
-};
+
 
 const datos = {
   title: 'Ley Karin ',
@@ -52,62 +40,32 @@ const datos = {
 </Base>
 
 <script is:inline>
-  // Script para la validación de coincidencia de empresas
-  document.addEventListener('DOMContentLoaded', function () {
-    const empresaSelect = document.getElementById('opcion_empresa_seleccionada_id');
-    const confirmacionSelect = document.getElementById('confirmacion_empresa_seleccionada_id');
-    const resultadoDiv = document.getElementById('resultado');
-
-    function validarCoincidencia() {
-      const empresaSeleccionada = empresaSelect.options[empresaSelect.selectedIndex].text;
-      const confirmacionEmpresa = confirmacionSelect.options[confirmacionSelect.selectedIndex].text;
-
-      if (empresaSeleccionada && confirmacionEmpresa && empresaSeleccionada !== 'Seleccione su empresa' && confirmacionEmpresa !== 'Seleccione su empresa') {
-        if (empresaSeleccionada === confirmacionEmpresa) {
-          resultadoDiv.textContent = 'Empresa coincide';
-          resultadoDiv.classList.remove('text-red-500');
-          resultadoDiv.classList.add('text-green-600');
-        } else {
-          resultadoDiv.textContent = 'No hay coincidencia, revise nuevamente la selección';
-          resultadoDiv.classList.remove('text-green-600');
-          resultadoDiv.classList.add('text-red-500');
-        }
-      } else {
-        resultadoDiv.textContent = '';
-        resultadoDiv.classList.remove('text-green-600', 'text-red-500');
-      }
-    }
-
-    empresaSelect.addEventListener('change', validarCoincidencia);
-    confirmacionSelect.addEventListener('change', validarCoincidencia);
-  });
-
   // Scripts para contadores de caracteres (adaptados para vanilla JS)
-  document.addEventListener('DOMContentLoaded', () => {
-    const setupCounter = (textareaId, counterId, limit) => {
-      const textarea = document.getElementById(textareaId);
-      const counter = document.getElementById(counterId);
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   const setupCounter = (textareaId, counterId, limit) => {
+  //     const textarea = document.getElementById(textareaId);
+  //     const counter = document.getElementById(counterId);
 
-      if (textarea && counter) {
-        const updateCounter = () => {
-          const caracteres = textarea.value.length;
-          counter.textContent = `${caracteres} / ${limit} caracteres`;
+  //     if (textarea && counter) {
+  //       const updateCounter = () => {
+  //         const caracteres = textarea.value.length;
+  //         counter.textContent = `${caracteres} / ${limit} caracteres`;
 
-          if (caracteres > limit) {
-            counter.classList.add('text-red-500'); // Clase para excedido
-          } else {
-            counter.classList.remove('text-red-500');
-          }
-        };
-        textarea.addEventListener('input', updateCounter);
-        updateCounter(); // Initial call to set the count
-      }
-    };
+  //         if (caracteres > limit) {
+  //           counter.classList.add('text-red-500'); // Clase para excedido
+  //         } else {
+  //           counter.classList.remove('text-red-500');
+  //         }
+  //       };
+  //       textarea.addEventListener('input', updateCounter);
+  //       updateCounter(); // Initial call to set the count
+  //     }
+  //   };
 
-    setupCounter('existirTestigos', 'contador1', 1000);
-    setupCounter('relatoSituacionDenunciaHoja1', 'contador2', 3450);
-    setupCounter('relatoSituacionDenunciaHoja2', 'contador3', 3450);
-  });
+  //   setupCounter('existirTestigos', 'contador1', 1000);
+  //   setupCounter('relatoSituacionDenunciaHoja1', 'contador2', 3450);
+  //   setupCounter('relatoSituacionDenunciaHoja2', 'contador3', 3450);
+  // });
 
   // La función `generarPDF()` necesita ser definida si es parte de tu lógica de negocio
   // Si no está definida, causará un error. Si es un archivo JS externo, impórtalo.

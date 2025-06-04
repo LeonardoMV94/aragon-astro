@@ -80,23 +80,23 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
             <p><strong>Área:</strong> ${data.denunciado.area_denunciado}</p>
 
             <h2>Antecedentes de la Denuncia:</h2>
-            <p><strong>Tipo de Denuncia:</strong> ${data.antecedentes_denuncia.denuncia_antecedentes}</p>
-            ${data.antecedentes_denuncia.relacion_victima_denunciado_antecedentes ? `
-            <p><strong>Relación entre Víctima y Denunciado:</strong><br>${data.antecedentes_denuncia.relacion_victima_denunciado_antecedentes.join(', ')}</p>
+            <p><strong>Tipo de Denuncia:</strong> ${data.antecedentes_denuncia.tipo_situacion}</p>
+            ${data.antecedentes_denuncia.relacion_victima_denunciado ? `
+            <p><strong>Relación entre Víctima y Denunciado:</strong><br>${data.antecedentes_denuncia.relacion_victima_denunciado.join(', ')}</p>
             ` : ''}
-            ${data.antecedentes_denuncia.presuntas_situaciones_denunciadas_antecedentes ? `
-            <p><strong>Presuntas Situaciones Denunciadas:</strong><br>${data.antecedentes_denuncia.presuntas_situaciones_denunciadas_antecedentes.join(', ')}</p>
+            ${data.antecedentes_denuncia.presuntas_situaciones ? `
+            <p><strong>Presuntas Situaciones Denunciadas:</strong><br>${data.antecedentes_denuncia.presuntas_situaciones.join(', ')}</p>
             ` : ''}
 
             <h2>Testigos:</h2>
-            ${data.testigos.testigos ? `
-            <p><strong>Información de Testigos:</strong><br>${data.testigos.testigos.replace(/\n/g, '<br>')}</p>
+            ${data.testigos.descripcion ? `
+            <p><strong>Información de Testigos:</strong><br>${data.testigos.descripcion.replace(/\n/g, '<br>')}</p>
             ` : '<p>No se proporcionó información de testigos.</p>'}
 
             <h2>Relato de la Denuncia:</h2>
-            <p><strong>Hoja 1:</strong><br>${data.relato_denuncia.namerelatoSituacionDenunciadaHoja1.replace(/\n/g, '<br>')}</p>
-            ${data.relato_denuncia.namerelatoSituacionDenunciadaHoja2 ? `
-            <p><strong>Hoja 2:</strong><br>${data.relato_denuncia.namerelatoSituacionDenunciadaHoja2.replace(/\n/g, '<br>')}</p>
+            <p><strong>Hoja 1:</strong><br>${data.relato_denuncia.hoja1.replace(/\n/g, '<br>')}</p>
+            ${data.relato_denuncia.hoja2 ? `
+            <p><strong>Hoja 2:</strong><br>${data.relato_denuncia.hoja2.replace(/\n/g, '<br>')}</p>
             ` : ''}
 
             <h2>Documentos de Respaldo:</h2>
