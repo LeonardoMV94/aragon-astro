@@ -3,10 +3,9 @@
 // Este componente encapsula la lógica y el UI del botón "Scroll to Top"
 // y está configurado para ser fijo en la esquina inferior derecha con un estilo predefinido.
 ---
-
 <button
   id="scrollToTopBtn"
-  class="fixed bottom-4 right-4 bg-[#f19404] hover:bg-[#e96d00] text-white p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 hidden"
+  class="fixed bottom-4 right-4 bg-[#f19404] hover:bg-[#e96d00] text-white p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 opacity-0 invisible"
   aria-label="Subir al inicio"
 >
   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -14,25 +13,51 @@
   </svg>
 </button>
 
-<script is:inline>
-  const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+<script>
+  // Función para manejar el scroll
+  function handleScroll() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) return;
 
-  // Mostrar/ocultar el botón basado en el scroll
-  // Se oculta inicialmente con la clase 'hidden' y se muestra con JS
-  window.onscroll = function() {
-    // Si el scroll vertical es mayor a 200px (o cualquier valor que prefieras)
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      scrollToTopBtn.classList.remove('hidden'); // Muestra el botón
+    // Si el scroll vertical es mayor a 200px
+    if (window.scrollY > 200) {
+      scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+      scrollToTopBtn.classList.add('opacity-100', 'visible');
     } else {
-      scrollToTopBtn.classList.add('hidden'); // Oculta el botón
+      scrollToTopBtn.classList.add('opacity-0', 'invisible');
+      scrollToTopBtn.classList.remove('opacity-100', 'visible');
     }
-  };
+  }
 
-  // Scroll suave al hacer clic
-  scrollToTopBtn.addEventListener('click', function() {
+  // Función para manejar el clic
+  function handleClick() {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-  });
+  }
+
+  // Inicializar el botón cuando el DOM esté listo
+  function initScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (!scrollToTopBtn) return;
+
+    // Agregar event listeners
+    window.addEventListener('scroll', handleScroll);
+    scrollToTopBtn.addEventListener('click', handleClick);
+
+    // Verificar posición inicial
+    handleScroll();
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollToTop);
+  } else {
+    initScrollToTop();
+  }
+
+  // Reinicializar después de la hidratación de Astro
+  document.addEventListener('astro:after-swap', initScrollToTop);
+  document.addEventListener('astro:page-load', initScrollToTop);
 </script>

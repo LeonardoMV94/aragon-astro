@@ -163,16 +163,15 @@ const { title, meta_title, description, image, noindex, canonical } =
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person"
     />
-    <!-- <script>document.documentElement.classList.add('js')</script> -->
   </head>
   <body>
     <TwSizeIndicator />
     <Header />
     <main id="main-content">
       <slot />
-      <ScrollToTopButton bgColor="[#f19404]-500" />
+
     </main>
+    <ScrollToTopButton bgColor="[#f19404]-500" />
     <Footer />
-    <!-- <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script> -->
   </body>
 </html>
