@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { leyKarinSchema } from "@/schemas/ley-karin/leyKarinSchema";
 import CollapsibleSection from "./CollapsibleSection";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const FormLeyKarin = () => {
   const [formMessage, setFormMessage] = useState(null);
@@ -65,7 +67,7 @@ const FormLeyKarin = () => {
         }
       });
 
-      const response = await fetch("/api/functions/ley-karin", {
+      const response = await fetch("/api/functions/leykarin", {
         method: "POST",
         body: formData,
       });
@@ -104,6 +106,147 @@ const FormLeyKarin = () => {
       .split(".")
       .reduce((obj, key) => obj?.[key], errors);
     return `form-control w-full p-3 border rounded-md ${fieldErrors ? "border-red-500" : "border-gray-300"}`;
+  };
+
+  const generatePDF = async () => {
+    try {
+      // Validar el formulario antes de generar el PDF
+      const formElement = document.querySelector('form');
+      if (!formElement) {
+        throw new Error('No se encontró el formulario');
+      }
+
+      const formData = new FormData(formElement);
+      const formValues = {};
+      for (let [key, value] of formData.entries()) {
+        formValues[key] = value;
+      }
+
+      const validationResult = leyKarinSchema.safeParse(formValues);
+
+      if (!validationResult.success) {
+        setFormMessage({
+          type: 'error',
+          text: 'Por favor, complete y valide todos los campos del formulario antes de generar el PDF.'
+        });
+        return;
+      }
+
+      // Crear un nuevo PDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      // Configurar el PDF
+      pdf.setFont('helvetica');
+      pdf.setFontSize(16);
+      pdf.text('Denuncia Ley Karin', 105, 20, { align: 'center' });
+
+      // Agregar fecha y hora
+      pdf.setFontSize(12);
+      const now = new Date();
+      pdf.text(`Fecha de generación: ${now.toLocaleString('es-CL')}`, 105, 30, { align: 'center' });
+
+      // Agregar datos del denunciante
+      pdf.setFontSize(14);
+      pdf.text('DATOS DEL DENUNCIANTE', 20, 45);
+      pdf.setFontSize(12);
+
+      let yPosition = 55;
+      const lineHeight = 8;
+
+      // Función auxiliar para agregar texto con manejo de saltos de línea
+      const addText = (text, y) => {
+        const splitText = pdf.splitTextToSize(text, 170);
+        pdf.text(splitText, 20, y);
+        return y + (splitText.length * lineHeight);
+      };
+
+      // Datos del denunciante
+      yPosition = addText(`Asunto: ${formValues['denunciante.asunto_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Nombres y Apellidos: ${formValues['denunciante.nombres_apellidos_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`RUT: ${formValues['denunciante.rut_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Cargo: ${formValues['denunciante.cargo_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Área: ${formValues['denunciante.area_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Email: ${formValues['denunciante.email_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Teléfono: ${formValues['denunciante.telefono_contacto_denunciante'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`¿Es la víctima?: ${formValues['denunciante.quien_realiza_denuncia'] === 'si' ? 'Sí' : 'No'}`, yPosition);
+
+      // Si no es la víctima, agregar datos del representante
+      if (formValues['denunciante.quien_realiza_denuncia'] === 'no') {
+        yPosition += lineHeight;
+        pdf.setFontSize(14);
+        pdf.text('DATOS DEL REPRESENTANTE', 20, yPosition);
+        yPosition += lineHeight;
+        pdf.setFontSize(12);
+
+        yPosition = addText(`Nombres y Apellidos: ${formValues['representante.nombres_apellidos_representante'] || 'No especificado'}`, yPosition);
+        yPosition = addText(`RUT: ${formValues['representante.rut_representante'] || 'No especificado'}`, yPosition);
+        yPosition = addText(`Cargo: ${formValues['representante.cargo_representante'] || 'No especificado'}`, yPosition);
+        yPosition = addText(`Área: ${formValues['representante.area_representante'] || 'No especificado'}`, yPosition);
+        yPosition = addText(`Email: ${formValues['representante.email_representante'] || 'No especificado'}`, yPosition);
+        yPosition = addText(`Teléfono: ${formValues['representante.telefono_contacto_representante'] || 'No especificado'}`, yPosition);
+      }
+
+      // Datos del denunciado
+      yPosition += lineHeight;
+      pdf.setFontSize(14);
+      pdf.text('DATOS DEL DENUNCIADO', 20, yPosition);
+      yPosition += lineHeight;
+      pdf.setFontSize(12);
+
+      yPosition = addText(`Nombres y Apellidos: ${formValues['denunciado.nombres_apellidos_denunciado'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`RUT: ${formValues['denunciado.rut_denunciado'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Cargo: ${formValues['denunciado.cargo_denunciado'] || 'No especificado'}`, yPosition);
+      yPosition = addText(`Área: ${formValues['denunciado.area_denunciado'] || 'No especificado'}`, yPosition);
+
+      // Antecedentes de la denuncia
+      yPosition += lineHeight;
+      pdf.setFontSize(14);
+      pdf.text('ANTECEDENTES DE LA DENUNCIA', 20, yPosition);
+      yPosition += lineHeight;
+      pdf.setFontSize(12);
+
+      yPosition = addText(`Tipo de Situación: ${formValues['antecedentes_denuncia.tipo_situacion'] || 'No especificado'}`, yPosition);
+
+      // Relato de la denuncia
+      yPosition += lineHeight;
+      pdf.setFontSize(14);
+      pdf.text('RELATO DE LA DENUNCIA', 20, yPosition);
+      yPosition += lineHeight;
+      pdf.setFontSize(12);
+
+      yPosition = addText(`Hoja 1: ${formValues['relato_denuncia.hoja1'] || 'No especificado'}`, yPosition);
+      if (formValues['relato_denuncia.hoja2']) {
+        yPosition = addText(`Hoja 2: ${formValues['relato_denuncia.hoja2']}`, yPosition);
+      }
+
+      // Documentos de respaldo
+      yPosition += lineHeight;
+      pdf.setFontSize(14);
+      pdf.text('DOCUMENTOS DE RESPALDO', 20, yPosition);
+      yPosition += lineHeight;
+      pdf.setFontSize(12);
+
+      if (formValues['documentos_respaldo.url_dadoPorUsuario_2']) {
+        yPosition = addText(`URL Documento 1: ${formValues['documentos_respaldo.url_dadoPorUsuario_2']}`, yPosition);
+      }
+      if (formValues['documentos_respaldo.url_dadoPorUsuario_3']) {
+        yPosition = addText(`URL Documento 2: ${formValues['documentos_respaldo.url_dadoPorUsuario_3']}`, yPosition);
+      }
+
+      // Guardar el PDF
+      pdf.save('denuncia-ley-karin.pdf');
+
+      setFormMessage({
+        type: 'success',
+        text: 'PDF generado con éxito'
+      });
+    } catch (error) {
+      console.error('Error al generar el PDF:', error);
+      setFormMessage({
+        type: 'error',
+        text: 'Error al generar el PDF. Por favor, intente nuevamente.'
+      });
+    }
   };
 
   return (
@@ -863,73 +1006,53 @@ const FormLeyKarin = () => {
       {/* SECCIÓN DOCUMENTOS */}
       <CollapsibleSection
         ref={documentosRef}
-        title="ADJUNTAR ALGUN DOCUMENTO DE RESPALDO"
+        title="DOCUMENTOS DE RESPALDO (URLs)"
       >
         <div className="grid grid-cols-1 md:gap-x-6">
           <div className="col-span-full">
             <p className="mb-4">
-              <strong>Los formatos soportados son:</strong>
-              JPG, PNG, DOCX, PPTX, PDF, MP3, MP4, ZIP | Tamaño Máximo por cada
-              formato: 10MB
+              <strong>Puede proporcionar URLs o enlaces a documentos de respaldo.</strong>
+              Ideal que los enlaces se encuentren lo más activos posible.
             </p>
+
             <div className="form-group mb-5">
               <label
                 className="form-label"
-                htmlFor="documentos_respaldo.archivos"
+                htmlFor="documentos_respaldo.url_dadoPorUsuario_2"
               >
-                Suba un respaldo de la denuncia en caso de poseerlo.
+                URL del Documento 1
               </label>
               <input
-                type="file"
-                id="documentos_respaldo.archivos"
-                accept=".jpg,.png,.docx,.pptx,.pdf,.mp3,.mp4,.zip"
-                className={getFieldClass("documentos_respaldo.archivos")}
-                {...register("documentos_respaldo.archivos")}
+                type="url"
+                id="documentos_respaldo.url_dadoPorUsuario_2"
+                placeholder="Ingrese URL o enlace del documento"
+                className={getFieldClass("documentos_respaldo.url_dadoPorUsuario_2")}
+                {...register("documentos_respaldo.url_dadoPorUsuario_2")}
               />
-              {errors.documentos_respaldo?.archivos && (
+              {errors.documentos_respaldo?.url_dadoPorUsuario_2 && (
                 <span className="text-red-500 text-sm mt-1 block">
-                  {errors.documentos_respaldo.archivos.message}
+                  {errors.documentos_respaldo.url_dadoPorUsuario_2.message}
                 </span>
               )}
             </div>
 
-            <p className="mb-2">
-              <strong>
-                Si tiene un archivo más pesado que 20MB, adjunte una url o
-                enlace,
-              </strong>
-              Ideal que el enlace se encuentre lo más activo posible
-            </p>
             <div className="form-group mb-5">
+              <label
+                className="form-label"
+                htmlFor="documentos_respaldo.url_dadoPorUsuario_3"
+              >
+                URL del Documento 2 (Opcional)
+              </label>
               <input
-                type="text"
-                id="documentos_respaldo.url1"
-                placeholder="Ingrese URL o enlace del archivo"
-                className={getFieldClass("documentos_respaldo.url1")}
-                {...register("documentos_respaldo.url1")}
+                type="url"
+                id="documentos_respaldo.url_dadoPorUsuario_3"
+                placeholder="Ingrese URL o enlace del documento"
+                className={getFieldClass("documentos_respaldo.url_dadoPorUsuario_3")}
+                {...register("documentos_respaldo.url_dadoPorUsuario_3")}
               />
-              {errors.documentos_respaldo?.url1 && (
+              {errors.documentos_respaldo?.url_dadoPorUsuario_3 && (
                 <span className="text-red-500 text-sm mt-1 block">
-                  {errors.documentos_respaldo.url1.message}
-                </span>
-              )}
-            </div>
-
-            <p className="mb-2">
-              <strong>Segunda URL (Opcional),</strong>
-              Ideal que el enlace se encuentre lo más activo posible
-            </p>
-            <div className="form-group mb-5">
-              <input
-                type="text"
-                id="documentos_respaldo.url2"
-                placeholder="Ingrese URL o enlace del archivo"
-                className={getFieldClass("documentos_respaldo.url2")}
-                {...register("documentos_respaldo.url2")}
-              />
-              {errors.documentos_respaldo?.url2 && (
-                <span className="text-red-500 text-sm mt-1 block">
-                  {errors.documentos_respaldo.url2.message}
+                  {errors.documentos_respaldo.url_dadoPorUsuario_3.message}
                 </span>
               )}
             </div>
@@ -967,10 +1090,15 @@ const FormLeyKarin = () => {
         <div className="w-full md:w-1/2 lg:w-1/3">
           <button
             type="button"
-            className="btn btn-secondary block w-full py-3 px-4 text-lg font-medium"
-            onClick={() => alert("Función Generar PDF aún no implementada")}
+            className="btn btn-outline-secondary block w-full py-3 px-4 text-lg font-medium"
+            onClick={generatePDF}
           >
-            Generar PDF Respaldo
+            <div className="flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+              </svg>
+              Generar PDF Respaldo
+            </div>
           </button>
         </div>
         <div className="w-full md:w-1/2 lg:w-1/3">

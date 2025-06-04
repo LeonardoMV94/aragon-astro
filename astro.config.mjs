@@ -9,6 +9,8 @@ import remarkToc from "remark-toc";
 import config from "./src/config/config.json";
 import netlify from '@astrojs/netlify';
 
+import auth from "auth-astro";
+
 // https://astro.build/config
 export default defineConfig({
   site: config.site.base_url ? config.site.base_url : "supports-fun-namely-fitted.trycloudflare.com",
@@ -20,26 +22,21 @@ export default defineConfig({
   adapter: netlify(),
   vite: { plugins: [tailwindcss()] },
   trailingSlash: config.site.trailing_slash ? "always" : "never",
-  integrations: [
-    react(),
-    sitemap(),
-    AutoImport({
-      imports: [
-        "@/shortcodes/Button",
-        "@/shortcodes/Accordion",
-        "@/shortcodes/Notice",
-        "@/shortcodes/Video",
-        "@/shortcodes/Youtube",
-        "@/shortcodes/Blockquote",
-        "@/shortcodes/Badge",
-        "@/shortcodes/ContentBlock",
-        "@/shortcodes/Changelog",
-        "@/shortcodes/Tab",
-        "@/shortcodes/Tabs",
-      ],
-    }),
-    mdx(),
-  ],
+  integrations: [react(), sitemap(), AutoImport({
+    imports: [
+      "@/shortcodes/Button",
+      "@/shortcodes/Accordion",
+      "@/shortcodes/Notice",
+      "@/shortcodes/Video",
+      "@/shortcodes/Youtube",
+      "@/shortcodes/Blockquote",
+      "@/shortcodes/Badge",
+      "@/shortcodes/ContentBlock",
+      "@/shortcodes/Changelog",
+      "@/shortcodes/Tab",
+      "@/shortcodes/Tabs",
+    ],
+  }), mdx(), auth()],
   markdown: {
     remarkPlugins: [
       remarkToc,

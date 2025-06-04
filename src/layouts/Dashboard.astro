@@ -1,0 +1,63 @@
+---
+import { getSession } from "auth-astro/server";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const session = await getSession(Astro.request);
+
+// Si no hay sesión, redirigir a login
+if (!session) {
+  return Astro.redirect("/login", 302);
+}
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Panel de Administración</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="min-h-screen">
+      <!-- Sidebar -->
+      <aside class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg">
+        <div class="flex items-center justify-center h-16 border-b">
+          <h1 class="text-xl font-bold text-gray-800">Admin Panel</h1>
+        </div>
+        <nav class="mt-6">
+          <a href="/dashboard" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+            <span>Dashboard</span>
+          </a>
+          <a href="/dashboard/profile" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+            <span>Perfil</span>
+          </a>
+          <a href="/dashboard/settings" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+            <span>Configuración</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="ml-64 p-8">
+        <header class="flex justify-between items-center mb-8">
+          <h2 class="text-2xl font-bold text-gray-800">{title}</h2>
+          <div class="flex items-center space-x-4">
+            <span class="text-gray-600">{session.user?.email}</span>
+            <form action="/api/auth/signout" method="post">
+              <button type="submit" class="px-4 py-2 text-sm text-white bg-red-600 rounded hover:bg-red-700">
+                Cerrar Sesión
+              </button>
+            </form>
+          </div>
+        </header>
+
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -55,15 +55,7 @@ if (TURSO_DATABASE_URL && TURSO_AUTH_TOKEN) {
   );
 }
 
-// // --- Esquema de Validación con Zod ---
-// const ContactFormSchema = z.object({
-//   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres.").max(100, "El nombre es demasiado largo."),
-//   email: z.string().email("El formato del correo electrónico no es válido."),
-//   subject: z.string().min(5, "El asunto debe tener al menos 5 caracteres.").max(200, "El asunto es demasiado largo."),
-//   message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres.").max(2000, "El mensaje es demasiado largo."),
-//   // Puedes añadir un campo honeypot aquí también, si lo implementas en el formulario
-//   // hp_field: z.string().optional(), // Este campo se ignoraría si está lleno en la validación
-// });
+
 
 // --- APIRoute POST Handler ---
 export const POST: APIRoute = async ({ request }) => {

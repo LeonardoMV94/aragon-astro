@@ -11,17 +11,17 @@ export const documentosRespaldoSchema = z.object({
 
   url_dadoPorUsuario_2: z
     .string()
-    .url({ message: 'Debe ser una URL válida.' }) // Valida que sea un formato de URL válido
-    .optional() // No tiene asterisco, así que es opcional.
-    .or(z.literal('')) // Permite que el campo esté vacío si es opcional
-    .transform(e => e === '' ? undefined : e), // Transforma strings vacíos a undefined
+    .url({ message: 'Debe ser una URL válida.' })
+    .optional()
+    .or(z.literal(''))
+    .transform(e => e === '' ? undefined : e),
 
   url_dadoPorUsuario_3: z
     .string()
-    .url({ message: 'Debe ser una URL válida.' }) // Valida que sea un formato de URL válido
-    .optional() // Es explícitamente "Opcional" en el HTML
-    .or(z.literal('')) // Permite que el campo esté vacío si es opcional
-    .transform(e => e === '' ? undefined : e), // Transforma strings vacíos a undefined
+    .url({ message: 'Debe ser una URL válida.' })
+    .optional()
+    .or(z.literal(''))
+    .transform(e => e === '' ? undefined : e),
 });
 
 export type DocumentosRespaldoFormData = z.infer<typeof documentosRespaldoSchema>;
