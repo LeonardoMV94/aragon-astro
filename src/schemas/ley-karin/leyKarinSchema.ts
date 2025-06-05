@@ -20,7 +20,7 @@ export const leyKarinSchema = z.object({
   documentos_respaldo: documentosRespaldoSchema, // Añade el esquema de documentos de respaldo aquí
 }).superRefine((data, ctx) => {
   // Lógica de validación condicional para DATOS DEL REPRESENTANTE
-  if (data.denunciante.quien_realiza_denuncia === 'No') {
+  if (data.denunciante.quien_realiza_denuncia === 'no') {
     if (!data.representante.nombres_apellidos_representante || data.representante.nombres_apellidos_representante.trim() === '') {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

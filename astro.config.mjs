@@ -1,42 +1,52 @@
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import sitemap from "@astrojs/sitemap";
+// import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import config from "./src/config/config.json";
-import netlify from '@astrojs/netlify';
+import netlify from "@astrojs/netlify";
 
 import auth from "auth-astro";
 
 // https://astro.build/config
 export default defineConfig({
-  site: config.site.base_url ? config.site.base_url : "supports-fun-namely-fitted.trycloudflare.com",
+  site: "https://aragonltda.cl",
   server: {
-    allowedHosts: ['myrtle-boots-compact-engaging.trycloudflare.com']
+    allowedHosts: ["myrtle-boots-compact-engaging.trycloudflare.com"],
   },
   base: config.site.base_path ? config.site.base_path : "/",
   output: "server",
   adapter: netlify(),
   vite: { plugins: [tailwindcss()] },
   trailingSlash: config.site.trailing_slash ? "always" : "never",
-  integrations: [react(), sitemap(), AutoImport({
-    imports: [
-      "@/shortcodes/Button",
-      "@/shortcodes/Accordion",
-      "@/shortcodes/Notice",
-      "@/shortcodes/Video",
-      "@/shortcodes/Youtube",
-      "@/shortcodes/Blockquote",
-      "@/shortcodes/Badge",
-      "@/shortcodes/ContentBlock",
-      "@/shortcodes/Changelog",
-      "@/shortcodes/Tab",
-      "@/shortcodes/Tabs",
-    ],
-  }), mdx(), auth()],
+  integrations: [
+    react(),
+    // sitemap({
+    //   changefreq: "weekly",
+    //   priority: 0.8,
+    //   lastmod: new Date().toISOString().split("T")[0],
+    // }),
+    AutoImport({
+      imports: [
+        "@/shortcodes/Button",
+        "@/shortcodes/Accordion",
+        "@/shortcodes/Notice",
+        "@/shortcodes/Video",
+        "@/shortcodes/Youtube",
+        "@/shortcodes/Blockquote",
+        "@/shortcodes/Badge",
+        "@/shortcodes/ContentBlock",
+        "@/shortcodes/Changelog",
+        "@/shortcodes/Tab",
+        "@/shortcodes/Tabs",
+      ],
+    }),
+    mdx(),
+    auth(),
+  ],
   markdown: {
     remarkPlugins: [
       remarkToc,
@@ -54,6 +64,6 @@ export default defineConfig({
     extendDefaultPlugins: true,
   },
   experimental: {
-    session: true
-  }
+    session: true,
+  },
 });
