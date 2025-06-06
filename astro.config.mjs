@@ -11,6 +11,8 @@ import netlify from "@astrojs/netlify";
 
 import auth from "auth-astro";
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://aragonltda.cl",
@@ -22,31 +24,26 @@ export default defineConfig({
   adapter: netlify(),
   vite: { plugins: [tailwindcss()] },
   trailingSlash: config.site.trailing_slash ? "always" : "never",
-  integrations: [
-    react(),
-    // sitemap({
-    //   changefreq: "weekly",
-    //   priority: 0.8,
-    //   lastmod: new Date().toISOString().split("T")[0],
-    // }),
-    AutoImport({
-      imports: [
-        "@/shortcodes/Button",
-        "@/shortcodes/Accordion",
-        "@/shortcodes/Notice",
-        "@/shortcodes/Video",
-        "@/shortcodes/Youtube",
-        "@/shortcodes/Blockquote",
-        "@/shortcodes/Badge",
-        "@/shortcodes/ContentBlock",
-        "@/shortcodes/Changelog",
-        "@/shortcodes/Tab",
-        "@/shortcodes/Tabs",
-      ],
-    }),
-    mdx(),
-    auth(),
-  ],
+  integrations: [react(), // sitemap({
+  //   changefreq: "weekly",
+  //   priority: 0.8,
+  //   lastmod: new Date().toISOString().split("T")[0],
+  // }),
+  AutoImport({
+    imports: [
+      "@/shortcodes/Button",
+      "@/shortcodes/Accordion",
+      "@/shortcodes/Notice",
+      "@/shortcodes/Video",
+      "@/shortcodes/Youtube",
+      "@/shortcodes/Blockquote",
+      "@/shortcodes/Badge",
+      "@/shortcodes/ContentBlock",
+      "@/shortcodes/Changelog",
+      "@/shortcodes/Tab",
+      "@/shortcodes/Tabs",
+    ],
+  }), mdx(), auth(), db()],
   markdown: {
     remarkPlugins: [
       remarkToc,
