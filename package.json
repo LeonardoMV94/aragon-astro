@@ -26,7 +26,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@libsql/client": "^0.15.7",
     "apexcharts": "^4.7.0",
-    "astro": "5.15.9",
+    "astro": "5.18.1",
     "astro-auto-import": "^0.4.4",
     "astro-font": "^1.0.0",
     "auth-astro": "^4.2.0",
