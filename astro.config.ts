@@ -11,8 +11,6 @@ import netlify from "@astrojs/netlify";
 
 import auth from "auth-astro";
 
-import db from "@astrojs/db";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://aragonltda.cl",
@@ -43,7 +41,7 @@ export default defineConfig({
       "@/shortcodes/Tab",
       "@/shortcodes/Tabs",
     ],
-  }), mdx(), auth(), db()],
+  }), mdx(), auth()],
   markdown: {
     remarkPlugins: [
       remarkToc,
