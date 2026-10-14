@@ -24,8 +24,8 @@ export default defineConfig({
   adapter: netlify(),
   vite: { plugins: [tailwindcss()] },
   trailingSlash: config.site.trailing_slash ? "always" : "never",
-  integrations: [react(), // sitemap({
-  //   changefreq: "weekly",
+  integrations: [// sitemap({
+  react(), //   changefreq: "weekly",
   //   priority: 0.8,
   //   lastmod: new Date().toISOString().split("T")[0],
   // }),
