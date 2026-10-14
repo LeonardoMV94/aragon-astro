@@ -60,7 +60,4 @@ export default defineConfig({
     },
     extendDefaultPlugins: true,
   },
-  experimental: {
-    session: true,
-  },
 });
